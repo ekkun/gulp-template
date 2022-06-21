@@ -1,4 +1,10 @@
 *.log
 
-/node_modules/*
+/node_modules/
+vendor
+debug.php
+.env
+_datacache
+sitemap.xml
 *.code-workspace
+package-lock.json
