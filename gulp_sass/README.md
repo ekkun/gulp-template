@@ -40,7 +40,7 @@ $ npx gulp
 │  │  ├─ style.css.map (ソースマップ)
 │  │  └─ custom.css (静的CSSファイル)
 │  ├─ images/ (画像ファイル)
-│  └─ js/  (JSファイル)
+│  ├─ js/  (静的JSファイル)
 │  └─ 他、静的ディレクトリ、ファイル群...
 │
 ├─ sass/（ソース）
@@ -52,13 +52,13 @@ $ npx gulp
 │  │  ├─ project/
 │  │  └─ utility/
 │  ├─ page/
-│  └─ style.scss
+│  └─ **style.scss**
 │
 ├─ .gitignore
 ├─ gulpfile.js
 ├─ package.json
 ├─ README.md
-├─ index.html (ドキュメントルートに置く全ての静的ファイル群)
+├─ index.html
 └─ 他、静的ディレクトリ、ファイル群...
 
 ```
