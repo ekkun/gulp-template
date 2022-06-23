@@ -1,37 +1,34 @@
+const TerserPlugin = require('terser-webpack-plugin');
+
 const devApp = {
   mode: 'development', // production, development
-
   entry: `./src/js/main.js`,
-
+  output: {
+    filename: 'main.js',
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                modules: false,
-                useBuiltIns: 'usage',
-                corejs: 3,
-                targets: {
-                  ie: '11',
-                },
-              },
-            ],
-          ],
-        },
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
+          },
+        ],
       },
     ],
   },
-
-  output: {
-    filename: 'main.js',
+  target: ['web', 'es5'],
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        extractComments: 'all',
+      }),
+    ],
   },
-
   devtool: 'source-map',
 };
 

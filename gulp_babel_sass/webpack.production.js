@@ -1,36 +1,43 @@
-const app = {
+const TerserPlugin = require('terser-webpack-plugin');
+
+const App = {
   mode: 'production', // production, development
-
   entry: `./src/js/main.js`,
-
+  output: {
+    filename: 'main.js',
+  },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: {
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                modules: false,
-                useBuiltIns: 'usage',
-                corejs: 3,
-                targets: {
-                  ie: '11',
-                },
-              },
-            ],
-          ],
-        },
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+            },
+          },
+        ],
       },
     ],
   },
-
-  output: {
-    filename: 'main.js',
+  target: ['web', 'es5'],
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          format: {
+            comments: false,
+          },
+          compress: {
+            drop_console: true,
+          },
+        },
+        extractComments: false,
+      }),
+    ],
   },
 };
 
-module.exports = app; //実行
+module.exports = App; //実行
