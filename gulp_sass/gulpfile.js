@@ -5,17 +5,10 @@ const { src, dest, watch, lastRun, series, parallel } = require('gulp');
 const sass = require('gulp-sass')(require('sass'));
 const plumber = require('gulp-plumber');
 const notify = require('gulp-notify');
-//const autoprefixer = require('gulp-autoprefixer');
 const postCss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const groupCssMediaQueries = require('gulp-group-css-media-queries');
 const cssNano = require('gulp-cssnano');
-
-// Sourcemaps
-//const sourcemaps = require('gulp-sourcemaps');
-
-// Browser Sync
-//const browserSync = require('browser-sync').create();
 
 // Path Setting
 const paths = {
