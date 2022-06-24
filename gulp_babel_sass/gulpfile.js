@@ -1,47 +1,34 @@
 // Gulp
-import gulpPackage from 'gulp';
-const { gulp, src, dest, watch, lastRun, series, parallel } = gulpPackage;
-import plumber from 'gulp-plumber';
+const { gulp, src, dest, watch, lastRun, series, parallel } = require('gulp');
+const plumber = require('gulp-plumber');
 
 // Sass
-import sass from 'gulp-dart-sass';
-import notify from 'gulp-notify';
-import postCss from 'gulp-postcss';
-import autoprefixer from 'autoprefixer';
-import groupCssMediaQueries from 'gulp-group-css-media-queries';
-import cssNano from 'gulp-cssnano';
+const sass = require('gulp-dart-sass');
+const notify = require('gulp-notify');
+const postCss = require('gulp-postcss');
+const autoprefixer = require('autoprefixer');
+const groupCssMediaQueries = require('gulp-group-css-media-queries');
+const cssNano = require('gulp-cssnano');
 
 // JavaScript
-import gulpESLint from 'gulp-eslint';
-import webpack from 'webpack';
-import webpackStream from 'webpack-stream';
-import webpackProductionConfig from './webpack.production.js';
-// const { App } = webpackProduction;
-// const webpackProductionConfig = webpackProduction;
-import webpackDevelopmentConfig from './webpack.development.js';
-// const { devApp } = webpackDevelopment;
-// const webpackDevelopmentConfig = webpackDevelopment;
+const gulpESLint = require('gulp-eslint');
+const webpack = require('webpack');
+const webpackStream = require('webpack-stream');
+const webpackProductionConfig = require('./webpack.production');
+const webpackDevelopmentConfig = require('./webpack.development');
 
 // Image Compression
-import imageMin from 'gulp-imagemin';
-// const imageMin = require('gulp-imagemin');
-import pngQuant from 'imagemin-pngquant';
-// const pngQuant = require('imagemin-pngquant');
-import mozJpeg from 'imagemin-mozjpeg';
-// const mozJpeg = require('imagemin-mozjpeg');
-import svgo from 'gulp-svgo';
-// const svgo = require('gulp-svgo');
-import webp from 'gulp-webp';
-// const webp = require('gulp-webp');
+const imageMin = require('gulp-imagemin');
+const pngQuant = require('imagemin-pngquant');
+const mozJpeg = require('imagemin-mozjpeg');
+const svgo = require('gulp-svgo');
+const webp = require('gulp-webp');
 
 // Browser Sync
-import { create as bsCreate } from 'browser-sync';
-const browserSync = bsCreate();
-//const browserSync = require('browser-sync').create();
+const browserSync = require('browser-sync').create();
 
 // Delete
-import del from 'del';
-//const del = require('del');
+const del = require('del');
 
 // Path Setting
 const paths = {
@@ -92,34 +79,39 @@ const compileProductionSass = () => {
     )
     .pipe(groupCssMediaQueries())
     .pipe(cssNano())
-    .pipe(dest(paths.styles.dist)); // フォルダーに保存
+    .pipe(dest(paths.styles.dist)) // フォルダーに保存
+    .pipe(browserSync.stream());
 };
 // Development
 const compileDevelopmentSass = () => {
-  return src(paths.styles.src, { sourcemaps: true }) // ファイルを取得
-    .pipe(
-      plumber({
-        errorHandler: notify.onError({
-          title: 'エラー',
-          message: '<%= error.message %>',
-        }),
-      })
-    )
-    .pipe(
-      sass({
-        outputStyle: 'expanded', // expanded, compressed
-      }).on('error', sass.logError)
-    )
-    .pipe(
-      postCss([
-        autoprefixer({
-          cascade: true,
-          grid: 'autoplace',
-        }),
-      ])
-    )
-    .pipe(groupCssMediaQueries())
-    .pipe(dest(paths.styles.dist, { sourcemaps: './' })); // フォルダーに保存
+  return (
+    src(paths.styles.src, { sourcemaps: true }) // ファイルを取得
+      .pipe(
+        plumber({
+          errorHandler: notify.onError({
+            title: 'エラー',
+            message: '<%= error.message %>',
+          }),
+        })
+      )
+      .pipe(
+        sass({
+          outputStyle: 'expanded', // expanded, compressed
+        }).on('error', sass.logError)
+      )
+      .pipe(
+        postCss([
+          autoprefixer({
+            cascade: true,
+            grid: 'autoplace',
+          }),
+        ])
+      )
+      .pipe(groupCssMediaQueries())
+      .pipe(dest(paths.styles.dist, { sourcemaps: './' })) // フォルダーに保存
+      //変更があった所のみコンパイル
+      .pipe(browserSync.stream())
+  );
 };
 
 /**

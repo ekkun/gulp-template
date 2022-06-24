@@ -7,7 +7,6 @@
     "type": "git",
     "url": ""
   },
-  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,7 +16,6 @@
   "devDependencies": {
     "@babel/core": "^7.18.5",
     "@babel/preset-env": "^7.18.2",
-    "@babel/register": "^7.17.7",
     "autoprefixer": "^10.4.7",
     "babel-loader": "^8.2.5",
     "browser-sync": "^2.27.10",
@@ -29,14 +27,15 @@
     "gulp-dart-sass": "^1.0.2",
     "gulp-eslint": "^6.0.0",
     "gulp-group-css-media-queries": "^1.2.2",
-    "gulp-imagemin": "^8.0.0",
+    "gulp-imagemin": "^7.1.0",
     "gulp-notify": "^4.0.0",
     "gulp-plumber": "^1.2.1",
     "gulp-postcss": "^9.0.1",
     "gulp-sass": "^5.1.0",
     "gulp-svgo": "^2.2.1",
     "gulp-webp": "^4.0.1",
-    "imagemin-mozjpeg": "^10.0.0",
+    "imagemin-gifsicle": "^7.0.0",
+    "imagemin-mozjpeg": "^9.0.0",
     "imagemin-pngquant": "^9.0.2",
     "node-sass": "^7.0.1",
     "npm-check-updates": "^14.0.2",
