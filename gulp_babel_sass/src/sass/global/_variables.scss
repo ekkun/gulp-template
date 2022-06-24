@@ -1,0 +1,54 @@
+// Root
+:root {
+  /*Colors*/
+  --blue: #00baf0;
+  --white: #fff;
+  --gray: #f4f4f4;
+  --orange: #ff9545;
+  --green: #4c6520;
+  --purple: #d900ff;
+
+  /*Style Guide*/
+  --primary-color: var(--blue);
+  --secondary-color: var(--white);
+  --accent-color: var(--gray);
+  --button-1: var(--orange);
+  --button-2: var(--green);
+}
+
+// Color
+//$colorWhite: #ffffff !default;
+//$colorBlack: #333333 !default;
+//$colorGreen: #37ab9d !default;
+//$colorRed: #e93d3d !default;
+
+// Break points
+$breakpoints: (
+  'xs': (
+    min-width: 320px,
+  ),
+  's': (
+    min-width: 375px,
+  ),
+  'sm': (
+    min-width: 425px,
+  ),
+  'md': (
+    min-width: 768px,
+  ),
+  'lg': (
+    min-width: 960px,
+  ),
+  'tab': (
+    min-width: 1024px,
+  ),
+  'xl': (
+    min-width: 1280px,
+  ),
+  'pc-md': (
+    min-width: 1440px,
+  ),
+  'pc-lg': (
+    min-width: 1920px,
+  ),
+) !default;

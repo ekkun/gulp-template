@@ -1,0 +1,20 @@
+// Footer
+@use '../global' as *;
+
+.footer {
+  color: #fff;
+  background-color: var(--blue);
+
+  @include mq(md) {
+    color: #000;
+    background-color: var(--orange);
+
+    @include mq(tab) {
+      background-color: var(--gray);
+
+      @include mq(xl) {
+        background-color: var(--purple);
+      }
+    }
+  }
+}
