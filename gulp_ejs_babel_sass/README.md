@@ -48,7 +48,10 @@ $ npx gulp build --env prod
 ## EJS 設定
 
 設定用の EJS に初期の値を入力してください。
-`./src/ejs/_templates/_config.ejs`
+
+```
+./src/ejs/_templates/_config.ejs
+```
 
 以下のコマンドのように `--env` に `prod`, `dev` を付与することで環境変数が反映されます。
 
@@ -114,6 +117,7 @@ $ npm cache clean --force
 $ npm install
 ```
 
-## 参考(Reference)
+## 参考 <!-- Reference -->
 
-https://onedarling.site/programming/htmlcss/gulp-ejs-sass/
+- [絶対つまずかない Gulp 4 入門(2022 年版)インストールと Sass を使うまでの手順](https://ics.media/entry/3290/)
+- [【2021 年版】web 制作のための Gulp×EJS×Sass(.scss)環境構築（Windows,Mac 対応）](https://onedarling.site/programming/htmlcss/gulp-ejs-sass/)
