@@ -1,6 +1,7 @@
 *.log
 
 /node_modules/
+/others/
 vendor
 debug.php
 .env
