@@ -36,7 +36,7 @@ $ npx gulp build
 
 ## ディレクトリ構成
 
-./sass/ 内のファイルを編集
+./src/js/, ./src/sass/ 内のファイルを編集
 
 - babel -> js
 - sass -> css
