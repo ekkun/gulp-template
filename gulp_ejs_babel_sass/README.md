@@ -101,10 +101,7 @@ $ npx gulp build --env prod
 ├─ package.json
 ├─ README.md
 ├─ webpack.development.js
-├─ webpack.production.js
-├─ index.html (ドキュメントルートに置く全ての静的ファイル群)
-└─ 他、静的ディレクトリ、ファイル群...
-
+└─ webpack.production.js
 ```
 
 ## 再インストール
