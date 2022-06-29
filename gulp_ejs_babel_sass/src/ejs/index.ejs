@@ -1,22 +1,30 @@
+<%- include('./_templates/_config.ejs'); %>
 <%_
-  const domain = process.env.domain;
-  const path = process.env.path;
-  const dir = process.env.dir;
-  const page = 'home';
+  const meta = {
+    page: 'home',
+    title: 'HOME｜サイト名',
+    description: 'ここにHOMEのディスクリプションが入ります',
+    canonical: 'https://prod.com/',
+    ogp: 'https://prod.com/assets/images/ogp.png',
+    stylePath: '/assets/css/',
+    scriptPath: '/assets/js/',
+    imgPath: '/assets/images/',
+    linkPath: '/'
+  };
   const structured = {
     item: [
       {
       },
     ]
-  }
+  };
 _%>
 <!DOCTYPE html>
 <html lang="ja">
-<%- include('./_templates/_head.ejs', { domain, path, dir, page, meta: data.meta[page] }); %>
+<%- include('./_templates/_head.ejs', { domain, path, dir, meta: meta, structured }); %>
 <body>
-<%- include('./_templates/_header.ejs', { domain, path, dir, page, meta: data.meta[page] }); %>
-<%- include('./_templates/_home.ejs', { domain, path, dir, page, meta: data.meta[page] }); %>
-<%- include('./_templates/_footer.ejs', { domain, path, dir, page, meta: data.meta[page] }); %>
-<script src="<%= data.meta[page].scriptPath; %>main.js"></script>
+<%- include('./_templates/_header.ejs', { domain, path, dir, meta: meta }); %>
+<%- include('./_templates/_home.ejs', { domain, path, dir, meta: meta }); %>
+<%- include('./_templates/_footer.ejs', { domain, path, dir, meta: meta }); %>
+<script src="<%= meta.scriptPath; %>main.js"></script>
 </body>
 </html>

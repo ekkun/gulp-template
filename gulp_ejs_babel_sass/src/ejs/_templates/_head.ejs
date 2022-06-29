@@ -48,7 +48,7 @@
         "name": "トップページ",
       }
     },
-  <%_ if (page !== 'home') { _%>
+  <%_ if (meta.page !== 'home') { _%>
     <%_ for (const item of structured.item) { _%>
     {
       "@type": "ListItem",
@@ -64,7 +64,7 @@
 }
 </script>
 </head>
-<body class="<%= page %>">
+<body class="<%= meta.page %>">
   <a id="top" name="top"></a>
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQBV8GM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
