@@ -1,0 +1,13 @@
+<%_
+let date = new Date();
+//console.log(date.toString());
+let year = date.getFullYear();
+let month = date.getMonth() + 1;
+let day = date.getDate();
+let dayOfWeek = date.getDay();
+const dayOfWeekName = ['日','月','火','水','木','金','土'];
+//console.log(year + '年' + month + '月' + day + '日' + '[' + dayOfWeekName[dayOfWeek] + ']');
+_%>
+<footer class="footer">
+  <p class="footer__copyright">&copy; <%= year; %> Design24℃</p>
+</footer>

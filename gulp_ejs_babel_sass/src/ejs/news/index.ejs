@@ -1,0 +1,44 @@
+<%- include('../_templates/_config.ejs'); %>
+<%_
+  const meta = {
+    page: 'news',
+    title: 'NEWS｜サイト名',
+    description: 'ここにNEWSのディスクリプションが入ります',
+    canonical: 'https://prod.com/',
+    ogp: 'https://prod.com/assets/images/ogp.png',
+    stylePath: '/assets/css/',
+    scriptPath: '/assets/js/',
+    imgPath: '/assets/images/',
+    linkPath: '../'
+  };
+  const structured = {
+    item: [
+      {
+        level: '2',
+        name: 'ニュース',
+        url: `/${ meta.page }/`,
+        children: 'detail',
+      },
+      {
+        level: '3',
+        name: 'ニュース詳細ページ',
+        url: `/${ meta.page }/detail/`,
+        children: '',
+
+      },
+    ]
+  };
+_%>
+<!DOCTYPE html>
+<html lang="ja">
+<%- include('../_templates/_head.ejs', { domain, path, dir, meta: meta, structured }); %>
+<body>
+<%- include('../_templates/_header.ejs', { domain, path, dir, meta: meta }); %>
+<main class="main">
+  <h1 class="">NEWS</h1>
+  <p>ニュースページです。</p>
+</main>
+<%- include('../_templates/_footer.ejs', { domain, path, dir, meta: meta }); %>
+<script src="<%= meta.scriptPath; %>main.js"></script>
+</body>
+</html>

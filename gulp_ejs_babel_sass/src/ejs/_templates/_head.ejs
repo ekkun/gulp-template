@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+<meta charset="utf-8">
+<!-- Google Tag Manager -->
+<script>
+</script>
+<!-- End Google Tag Manager -->
+<title><%= meta.title %></title>
+<meta name="description" content="<%= meta.description %>">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@ユーザー名" />
+<meta property="og:url" content="<%= domain %>">
+<meta property="og:type" content="article">
+<meta property="og:title" content="<%= meta.title %>">
+<meta property="og:image" content="<%= meta.ogp %>">
+<meta property="og:description" content="<%= meta.description %>">
+<meta property="og:site_name" content="">
+<link rel="canonical" href="<%= meta.canonical %>">
+<link rel="shortcut icon" href="<%= domain %>/assets/images/favicon/favicon.ico" />
+<link rel="icon" type="image/x-icon" sizes="16x16 32x32" href="<%= domain %>/assets/images/favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="152x152" href="<%= domain %>/assets/images/favicon/favicon-152.png">
+<link rel="apple-touch-icon" sizes="144x144" href="<%= domain %>/assets/images/favicon/favicon-144.png">
+<link rel="apple-touch-icon" sizes="120x120" href="<%= domain %>/assets/images/favicon/favicon-120.png">
+<link rel="apple-touch-icon" sizes="114x114" href="<%= domain %>/assets/images/favicon/favicon-114.png">
+<link rel="apple-touch-icon" sizes="180x180" href="<%= domain %>/assets/images/favicon/favicon-180.png">
+<link rel="apple-touch-icon" sizes="72x72" href="<%= domain %>/assets/images/favicon/favicon-72.png">
+<link rel="apple-touch-icon" sizes="57x57" href="<%= domain %>/assets/images/favicon/favicon-57.png">
+<link rel="icon" sizes="32x32" href="<%= domain %>/assets/images/favicon/favicon-32.png" >
+<meta name="msapplication-TileColor" content="#FFFFFF">
+<meta name="msapplication-TileImage" content="<%= domain %>/assets/images/favicon/favicon-144.png">
+<link rel="manifest" href="<%= domain %>/assets/images/favicon/manifest.json">
+<link rel="icon" sizes="192x192" href="<%= domain %>/assets/images/favicon/favicon-192.png">
+<link rel="stylesheet" type="text/css" href="<%= meta.stylePath %>style.css" media="all">
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@id": "<%= domain %>/",
+        "name": "トップページ",
+      }
+    },
+  <%_ if (meta.page !== 'home') { _%>
+    <%_ for (const item of structured.item) { _%>
+    {
+      "@type": "ListItem",
+      "position": <%= item.level %>,
+      "item": {
+        "@id": "<%= domain %><%= item.url %>",
+        "name": "<%= item.name %>",
+      }
+    },
+    <%_ } _%>
+  <%_ } _%>
+  ]
+}
+</script>
+</head>
+<body class="<%= meta.page %>">
+  <a id="top" name="top"></a>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQBV8GM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
