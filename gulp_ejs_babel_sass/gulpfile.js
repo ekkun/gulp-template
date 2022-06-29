@@ -2,6 +2,35 @@
 const { gulp, src, dest, watch, lastRun, series, parallel } = require('gulp');
 const plumber = require('gulp-plumber');
 
+// Environment Setting
+const minimist = require('minimist');
+const options = minimist(process.argv.slice(2), {
+  string: 'env',
+  default: {
+    env: '',
+  },
+});
+if (options.env === 'prod') {
+  // 本番環境
+  process.env = Object.assign(process.env, {
+    state: 'prod',
+    //domain: 'https://prod.com',
+  });
+} else if (options.env === 'dev') {
+  // テスト環境
+  process.env = Object.assign(process.env, {
+    state: 'dev',
+    //domain: 'https://dev.com',
+  });
+} else {
+  // ローカル環境
+  process.env = Object.assign(process.env, {
+    state: '',
+    //domain: 'http://localhost:4000',
+  });
+}
+//console.info(process.env.domain);
+
 // EJS
 const fs = require('fs');
 const htmlMin = require('gulp-htmlmin');
@@ -63,14 +92,15 @@ const paths = {
     srcWebp: './src/images/**/*.{jpg,jpeg,png}',
     dist: './public/assets/images/',
     distWebp: './public/assets/images/webp/',
+    static: './src/static/images/**/*.{jpg,jpeg,png,gif,svg,ico}',
   },
   fonts: {
-    src: './src/fonts/**/*.{otf,ttf,woff,woff2}',
+    src: './src/static/fonts/**/*.{otf,ttf,woff,woff2}',
     dist: './public/assets/fonts/',
   },
   json: {
-    src: './src/json/**/*.json',
-    dist: './public/assets/json/',
+    src: './src/static/json/**/*.json',
+    dist: './public/',
   },
   del: {
     all: './public/',
@@ -84,73 +114,44 @@ const paths = {
   },
 };
 
-// Environment Setting
-const minimist = require('minimist');
-const options = minimist(process.argv.slice(2), {
-  string: 'env',
-  default: {
-    env: '',
-  },
-});
-if (options.env === 'prod') {
-  // 本番環境
-  process.env = Object.assign(process.env, {
-    domain: 'https://prod.com',
-    path: '/',
-    dir: '../',
-  });
-} else if (options.env === 'dev') {
-  // テスト環境
-  process.env = Object.assign(process.env, {
-    domain: 'https://dev.com',
-    path: '/',
-    dir: '../',
-  });
-} else {
-  // ローカル環境
-  process.env = Object.assign(process.env, {
-    domain: 'http://localhost:4000',
-    path: '/',
-    dir: '../',
-  });
-}
-//console.info(process.env.domain);
-
 /**
  * EJS Compile
  */
 const ejsCompile = () => {
-  const data = JSON.parse(fs.readFileSync('./src/ejs/config.json')); // 設定ファイル
-  return src(paths.ejs.src)
-    .pipe(
-      plumber({
-        errorHandler: notify.onError('Error: <%= error.message %>'),
-      })
-    )
-    .pipe(ejs(data))
-    .pipe(
-      rename({
-        extname: '.html',
-      })
-    )
-    .pipe(
-      htmlMin({
-        // オプション参照：https://github.com/kangax/html-minifier
-        removeComments: true,
-        collapseWhitespace: true,
-        collapseInlineTagWhitespace: true,
-        preserveLineBreaks: true,
-      })
-    )
-    .pipe(
-      prettify({
-        indent_with_tabs: false,
-        indent_size: 2,
-      })
-    )
-    .pipe(replace(/[\s\S]*?(<!DOCTYPE)/, '$1'))
-    .pipe(dest(paths.ejs.dist))
-    .pipe(browserSync.stream());
+  //const data = JSON.parse(fs.readFileSync('./src/ejs/config.json')); // 設定ファイル
+  return (
+    src(paths.ejs.src)
+      .pipe(
+        plumber({
+          errorHandler: notify.onError('Error: <%= error.message %>'),
+        })
+      )
+      //.pipe(ejs(data))
+      .pipe(ejs())
+      .pipe(
+        rename({
+          extname: '.html',
+        })
+      )
+      .pipe(
+        htmlMin({
+          // オプション参照：https://github.com/kangax/html-minifier
+          removeComments: true,
+          collapseWhitespace: true,
+          collapseInlineTagWhitespace: true,
+          preserveLineBreaks: true,
+        })
+      )
+      .pipe(
+        prettify({
+          indent_with_tabs: false,
+          indent_size: 2,
+        })
+      )
+      .pipe(replace(/[\s\S]*?(<!DOCTYPE)/, '$1'))
+      .pipe(dest(paths.ejs.dist))
+      .pipe(browserSync.stream())
+  );
 };
 
 /**
@@ -299,6 +300,10 @@ const jsCopy = () => {
 const cssCopy = () => {
   return src(paths.styles.static).pipe(dest(paths.styles.dist));
 };
+// IMAGES
+const imagesCopy = () => {
+  return src(paths.images.static).pipe(dest(paths.images.dist));
+};
 // FONT
 const fontsCopy = () => {
   return src(paths.fonts.src).pipe(dest(paths.fonts.dist));
@@ -334,8 +339,11 @@ const browserReloadFunc = (done) => {
 };
 
 /**
- * File deletion (CSS, JS, IMG)
+ * File deletion
  */
+const cleanAllFiles = () => {
+  return del(paths.del.all);
+};
 //const cleanAssetsFiles = () => {
 //  return del([paths.styles.dist, paths.scripts.dist, paths.images.dist]);
 //};
@@ -357,12 +365,14 @@ const watchFiles = () => {
   watch(paths.styles.src).on('change', series(compileDevelopmentSass));
   watch(paths.styles.static, series(cssCopy));
   watch(paths.images.src).on('change', series(imagesCompress));
+  watch(paths.images.static, series(imagesCopy, browserReloadFunc));
   watch(paths.fonts.src, series(fontsCopy, browserReloadFunc));
   watch(paths.json.src, series(jsonCopy, browserReloadFunc));
 };
 
 // $ npx gulp
 exports.default = series(
+  parallel(cleanAllFiles),
   parallel(
     ejsCompile,
     htmlCopy,
@@ -371,6 +381,7 @@ exports.default = series(
     compileDevelopmentSass,
     cssCopy,
     imagesCompress,
+    imagesCopy,
     fontsCopy,
     jsonCopy
   ),
@@ -379,8 +390,8 @@ exports.default = series(
 
 // $ npx gulp dev
 exports.dev = series(
+  parallel(cleanAllFiles),
   parallel(
-    //cleanMapFiles,
     ejsCompile,
     htmlCopy,
     bundleDevelopmentJavaScript,
@@ -388,6 +399,7 @@ exports.dev = series(
     compileDevelopmentSass,
     cssCopy,
     imagesCompress,
+    imagesCopy,
     fontsCopy,
     jsonCopy
   )
@@ -395,8 +407,9 @@ exports.dev = series(
 
 // $ npx gulp build
 exports.build = series(
+  parallel(cleanAllFiles),
   parallel(
-    //cleanMapFiles,
+    cleanAllFiles,
     ejsCompile,
     htmlCopy,
     bundleProductionJavaScript,
@@ -404,6 +417,7 @@ exports.build = series(
     compileProductionSass,
     cssCopy,
     imagesCompress,
+    imagesCopy,
     fontsCopy,
     jsonCopy
   )
