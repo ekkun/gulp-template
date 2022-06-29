@@ -64,7 +64,7 @@ $ npx gulp stylelint
 ├─ gulpfile.js
 ├─ package.json
 ├─ README.md
-├─ scss-lint.yml
+├─ stylelint.config.js
 ├─ index.html
 └─ 他、静的ディレクトリ、ファイル群...
 
