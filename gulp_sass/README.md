@@ -24,6 +24,12 @@ $ npx gulp
 - npm で Gulp をグローバルにインストールしている場合は `$ gulp` のみで実行可能です。
 - Browser Sync は入れていません。
 
+## stylelint の実行
+
+```
+$ npx gulp stylelint
+```
+
 ## ディレクトリ構成
 
 ./sass/ 内のファイルを編集
@@ -58,6 +64,7 @@ $ npx gulp
 ├─ gulpfile.js
 ├─ package.json
 ├─ README.md
+├─ scss-lint.yml
 ├─ index.html
 └─ 他、静的ディレクトリ、ファイル群...
 
