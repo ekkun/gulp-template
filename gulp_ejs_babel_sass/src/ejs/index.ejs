@@ -1,0 +1,22 @@
+<%_
+  const domain = process.env.domain;
+  const path = process.env.path;
+  const dir = process.env.dir;
+  const page = 'home';
+  const structured = {
+    item: [
+      {
+      },
+    ]
+  }
+_%>
+<!DOCTYPE html>
+<html lang="ja">
+<%- include('./_templates/_head.ejs', { domain, path, dir, page, meta: data.meta[page] }); %>
+<body>
+<%- include('./_templates/_header.ejs', { domain, path, dir, page, meta: data.meta[page] }); %>
+<%- include('./_templates/_home.ejs', { domain, path, dir, page, meta: data.meta[page] }); %>
+<%- include('./_templates/_footer.ejs', { domain, path, dir, page, meta: data.meta[page] }); %>
+<script src="<%= data.meta[page].scriptPath; %>main.js"></script>
+</body>
+</html>

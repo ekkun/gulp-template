@@ -1,0 +1,26 @@
+{
+  "data": {
+    "meta": {
+      "home": {
+        "title": "HOME｜サイト名",
+        "description": "ここにHOMEのディスクリプションが入ります",
+        "canonical": "https://prod.com/",
+        "ogp": "https://prod.com/assets/images/ogp.png",
+        "stylePath": "./assets/css/",
+        "scriptPath": "./assets/js/",
+        "imgPath": "./assets/images/",
+        "linkPath": "./"
+      },
+      "news": {
+        "title": "NEWS｜サイト名",
+        "description": "ここにNEWSのディスクリプションが入ります",
+        "canonical": "https://prod.com/news/",
+        "ogp": "https://prod.com/assets/images/ogp.png",
+        "stylePath": "../assets/css/",
+        "scriptPath": "../assets/js/",
+        "imgPath": "../assets/images/",
+        "linkPath": "../"
+      }
+    }
+  }
+}

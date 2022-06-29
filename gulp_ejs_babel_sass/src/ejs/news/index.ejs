@@ -1,0 +1,37 @@
+<%_
+  const domain = process.env.domain;
+  const path = process.env.path;
+  const dir = process.env.dir;
+  const page = 'news';
+  const structured = {
+    item: [
+      {
+        level: '2',
+        name: 'ニュース',
+        url: `/${ page }/`,
+        children: 'detail',
+      },
+      {
+        level: '3',
+        name: 'ニュース詳細ページ',
+        url: `${ page }/detail/`,
+        children: '',
+      },
+    ]
+  }
+_%>
+<!DOCTYPE html>
+<html lang="ja">
+<%- include('../_templates/_head.ejs', { domain, path, dir, page, structured, meta: data.meta[page] }); %>
+<body>
+<%- include('../_templates/_header.ejs', { domain, path, dir, page, meta: data.meta[page] }); %>
+
+<main class="main">
+  <h1 class="">NEWS</h1>
+  <p>ニュースページです。</p>
+</main>
+
+<%- include('../_templates/_footer.ejs', { domain, path, dir, page, meta: data.meta[page] }); %>
+<script src="<%= data.meta[page].scriptPath; %>main.js"></script>
+</body>
+</html>
