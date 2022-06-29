@@ -9,6 +9,7 @@ const postCss = require('gulp-postcss');
 const autoprefixer = require('autoprefixer');
 const groupCssMediaQueries = require('gulp-group-css-media-queries');
 const cssNano = require('gulp-cssnano');
+const gulpSassLint = require('gulp-scss-lint');
 
 // Path Setting
 const paths = {
@@ -51,12 +52,27 @@ const compileSass = () => {
 };
 
 /**
+ * Sass Lint
+ */
+const sassLint = () => {
+  return src(paths.styles.src).pipe(
+    gulpSassLint({
+      config: 'scss-lint.yml',
+    })
+  );
+};
+
+/**
  * Watch
  */
 // ファイル監視
 const watchFiles = () => {
-  watch(paths.styles.src, compileSass);
+  watch(paths.styles.src).on('change', series(compileSass, sassLint));
+  //watch(paths.styles.src, compileSass);
 };
 
 // $ npx gulp
 exports.default = series(parallel(watchFiles));
+
+// $ npx gulp sassLint
+exports.sassLint = sassLint;
