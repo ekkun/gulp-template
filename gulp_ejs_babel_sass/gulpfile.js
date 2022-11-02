@@ -140,6 +140,8 @@ const ejsCompile = () => {
           collapseWhitespace: true,
           collapseInlineTagWhitespace: true,
           preserveLineBreaks: true,
+          minifyCSS: true,
+          minifyJS: true,
         })
       )
       .pipe(

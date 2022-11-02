@@ -4,7 +4,7 @@
     page: 'news',
     title: 'NEWS｜サイト名',
     description: 'ここにNEWSのディスクリプションが入ります',
-    canonical: 'https://prod.com/',
+    canonical: 'https://prod.com/news/detail/',
     ogp: 'https://prod.com/assets/images/ogp.png',
     stylePath: '/assets/css/',
     scriptPath: '/assets/js/',
@@ -17,16 +17,13 @@
         level: '2',
         name: 'ニュース',
         url: `/${ meta.page }/`,
-        children: 'detail',
       },
       {
         level: '3',
         name: 'ニュース詳細ページ',
         url: `/${ meta.page }/detail/`,
-        children: '',
-
       },
-    ]
+    ],
   };
 _%>
 <!DOCTYPE html>
