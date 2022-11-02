@@ -1,9 +1,9 @@
 # Gulp Template
 
 Gulp + Babel(Webpack) + Sass + Image Compression
-For node v16 or v14
+For node v16 and v14
 
-(macOS12.4 / node v16.15.1, node v14.19.3 検証済み)
+(macOS12.6 / node v16.18.0, node v14.20.1 検証済み)
 
 JavaScrip トランスパイル, Sass (Scss), 画像圧縮を目的としたタスクランナー。
 ドキュメントルートに Gulp まわりの設定ファイルを置いて `npm i` するだけで JavaScript の監視、バンドル、トランスパイル、ミニファイ、Scss の監視、ベンダープレフィックス付与、メディアクエリ集約、コンパイル、ミニファイ、画像の監視、圧縮までします。
