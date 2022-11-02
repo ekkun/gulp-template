@@ -1,11 +1,15 @@
 @use 'variables' as *;
 
 // media query
-@mixin mq($breakpoint) {
-  @if map-has-key($breakpoints, $breakpoint) {
-    @media screen and #{inspect(map-get($breakpoints, $breakpoint))} {
-      @content;
-    }
+@mixin mq-min($breakpoint: md) {
+  @media #{map-get($breakpoint-up, $breakpoint)} {
+    @content;
+  }
+}
+
+@mixin mq-max($breakpoint: md) {
+  @media #{map-get($breakpoint-down, $breakpoint)} {
+    @content;
   }
 }
 

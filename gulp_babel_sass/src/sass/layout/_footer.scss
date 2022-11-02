@@ -5,16 +5,16 @@
   color: #fff;
   background-color: var(--blue);
 
-  @include mq(md) {
+  @include mq-min(md) {
     color: #000;
     background-color: var(--orange);
+  }
 
-    @include mq(tab) {
-      background-color: var(--gray);
+  @include mq-min(tab) {
+    background-color: var(--gray);
+  }
 
-      @include mq(xl) {
-        background-color: var(--purple);
-      }
-    }
+  @include mq-min(xl) {
+    background-color: var(--purple);
   }
 }

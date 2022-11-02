@@ -36,32 +36,40 @@
 <link rel="icon" sizes="192x192" href="<%= domain %>/assets/images/favicon/favicon-192.png">
 <link rel="stylesheet" type="text/css" href="<%= meta.stylePath %>style.css" media="all">
 <script type="application/ld+json">
-{
-  "@context": "http://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "item": {
-        "@id": "<%= domain %>/",
-        "name": "トップページ",
-      }
-    },
-  <%_ if (meta.page !== 'home') { _%>
-    <%_ for (const item of structured.item) { _%>
-    {
-      "@type": "ListItem",
-      "position": <%= item.level %>,
-      "item": {
-        "@id": "<%= domain %><%= item.url %>",
-        "name": "<%= item.name %>",
-      }
-    },
-    <%_ } _%>
-  <%_ } _%>
-  ]
-}
+[
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "<%= domain %>/",
+    "logo": ""
+  },
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "<%= domain %>/",
+          "name": "トップページ"
+        }
+      }<%_ if (meta.page !== 'home') { _%>,<%_ } _%>
+    <%_ if (meta.page !== 'home') { _%>
+      <%_ for (const item of structured.item) { _%>
+      {
+        "@type": "ListItem",
+        "position": <%= item.level %>,
+        "item": {
+          "@id": "<%= domain %><%= item.url %>",
+          "name": "<%= item.name %>"
+        }
+      },
+      <% } %>
+    <% } %>
+    ]
+  }
+]
 </script>
 </head>
 <body class="<%= meta.page %>">
