@@ -61,6 +61,8 @@
     "ie >= 11"
   ],
   "comments": {
+    "install": "$ arch -arm64 npm i (このコマンドでもM1 Macだとnode@16でインスコできない...)",
+    "gulp": "$ npx gulp, $ npx gulp dev, $ npx gulp build",
     "npm-check-updates": "$ npx ncu, $ npx ncu -u --target patch"
   }
 }
