@@ -107,7 +107,7 @@ const compileDevelopmentSass = () => {
           }),
         ])
       )
-      .pipe(groupCssMediaQueries())
+      // .pipe(groupCssMediaQueries())
       .pipe(dest(paths.styles.dist, { sourcemaps: './' })) // フォルダーに保存
       //変更があった所のみコンパイル
       .pipe(browserSync.stream())
