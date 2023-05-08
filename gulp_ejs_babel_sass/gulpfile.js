@@ -216,31 +216,33 @@ const compileProductionSass = () => {
 };
 // Development
 const compileDevelopmentSass = () => {
-  return src(paths.styles.src, { sourcemaps: true }) // ファイルを取得
-    .pipe(
-      plumber({
-        errorHandler: notify.onError({
-          title: 'エラー',
-          message: '<%= error.message %>',
-        }),
-      })
-    )
-    .pipe(
-      sass({
-        outputStyle: 'expanded', // expanded, compressed
-      }).on('error', sass.logError)
-    )
-    .pipe(
-      postCss([
-        autoprefixer({
-          cascade: true,
-          grid: 'autoplace',
-        }),
-      ])
-    )
-    .pipe(groupCssMediaQueries())
-    .pipe(dest(paths.styles.dist, { sourcemaps: './' })) // フォルダーに保存
-    .pipe(browserSync.stream());
+  return (
+    src(paths.styles.src, { sourcemaps: true }) // ファイルを取得
+      .pipe(
+        plumber({
+          errorHandler: notify.onError({
+            title: 'エラー',
+            message: '<%= error.message %>',
+          }),
+        })
+      )
+      .pipe(
+        sass({
+          outputStyle: 'expanded', // expanded, compressed
+        }).on('error', sass.logError)
+      )
+      .pipe(
+        postCss([
+          autoprefixer({
+            cascade: true,
+            grid: 'autoplace',
+          }),
+        ])
+      )
+      // .pipe(groupCssMediaQueries())
+      .pipe(dest(paths.styles.dist, { sourcemaps: './' })) // フォルダーに保存
+      .pipe(browserSync.stream())
+  );
 };
 
 /**
