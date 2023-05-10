@@ -38,13 +38,13 @@ $breakpoint-up: (
 
 // max-width
 $breakpoint-down: (
-  'xs': 'print, screen and (min-width: 320px - 1px)',
-  's': 'print, screen and (min-width: 375px - 1px)',
-  'sm': 'print, screen and (min-width: 425px - 1px)',
-  'md': 'print, screen and (min-width: 768px - 1px)',
-  'lg': 'print, screen and (min-width: 960px - 1px)',
-  'tab': 'print, screen and (min-width: 1024px - 1px)',
-  'xl': 'print, screen and (min-width: 1280px - 1px)',
-  'pc-md': 'print, screen and (min-width: 1440px - 1px)',
-  'pc-lg': 'print, screen and (min-width: 1920px - 1px)',
+  'xs': 'print, screen and (max-width: 319px)',
+  's': 'print, screen and (max-width: 374px)',
+  'sm': 'print, screen and (max-width: 424px)',
+  'md': 'print, screen and (max-width: 767px)',
+  'lg': 'print, screen and (max-width: 959px)',
+  'tab': 'print, screen and (max-width: 1023px)',
+  'xl': 'print, screen and (max-width: 1279px)',
+  'pc-md': 'print, screen and (max-width: 1439px)',
+  'pc-lg': 'print, screen and (max-width: 1919px)',
 ) !default;
