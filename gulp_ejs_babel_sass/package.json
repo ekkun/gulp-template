@@ -14,11 +14,11 @@
   "author": "eiji@design24c.com",
   "license": "(c) Design24C",
   "devDependencies": {
-    "@babel/core": "^7.21.4",
-    "@babel/preset-env": "^7.21.4",
-    "autoprefixer": "^10.4.14",
+    "@babel/core": "^7.21.8",
+    "@babel/preset-env": "^7.21.5",
+    "autoprefixer": "^10.4.16",
     "babel-loader": "^8.3.0",
-    "browser-sync": "^2.29.1",
+    "browser-sync": "^2.29.3",
     "del": "^6.1.1",
     "eslint": "^8.37.0",
     "eslint-plugin-eslint-comments": "^3.2.0",
@@ -46,14 +46,14 @@
     "minimist": "^1.2.8",
     "node-sass": "^7.0.3",
     "npm-check-updates": "^14.1.1",
-    "postcss": "^8.4.21",
+    "postcss": "^8.4.31",
     "sass": "^1.60.0",
-    "terser-webpack-plugin": "^5.3.7",
+    "terser-webpack-plugin": "^5.3.9",
     "webpack": "^5.78.0",
     "webpack-stream": "^7.0.0"
   },
   "dependencies": {
-    "core-js": "^3.30.0",
+    "core-js": "^3.30.2",
     "jquery": "^3.6.4"
   },
   "browserslist": [
@@ -62,7 +62,7 @@
   ],
   "comments": {
     "install": "$ arch -arm64 npm i (このコマンドでもM1 Macだとnode@16でインスコできない...)",
-    "gulp": "$ npx gulp, $ npx gulp dev, $ npx gulp build",
+    "gulp": "$ npx gulp, $ npx gulp dev --env dev, $ npx gulp build --env prod",
     "npm-check-updates": "$ npx ncu, $ npx ncu -u --target patch"
   }
 }
