@@ -1,0 +1,5 @@
+*.log
+
+/public/*
+/node_modules/*
+*.map
