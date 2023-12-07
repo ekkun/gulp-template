@@ -1,0 +1,8 @@
+mixin article(options)
+  ul.article
+    each item in patterns.items
+      li.item(id=`camouflage-patterns-${ item.id }`)
+        .item__inner
+          span #{ item.name }
+          span  / 
+          span #{ item.image }

@@ -1,0 +1,27 @@
+extends ../_template/_layout
+
+block vars
+  -
+    head.title = 'CONTACT'
+    head.slug = 'contact'
+    head.keywords = ''
+    head.description = 'コンタクトページなんです！'
+
+block append head
+
+block append style
+  link(rel='stylesheet', href=`${ filePath }assets/css/contact.css`)
+
+block includes
+
+block main
+  main#main.main
+    .main__inner
+
+
+  //- アーティクル
+  article.contact コンタクトページなんです！
+
+block append scripts
+  //-
+    script(src=`${ filePath }assets/js/contact.js`)
