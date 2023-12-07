@@ -1,34 +1,35 @@
 // Gulp
-const { gulp, src, dest, watch, lastRun, series, parallel } = require('gulp');
-const plumber = require('gulp-plumber');
+import pkg from 'gulp';
+const { gulp, src, dest, watch, lastRun, series, parallel } = pkg;
+import plumber from 'gulp-plumber';
 
 // Sass
-const sass = require('gulp-dart-sass');
-const notify = require('gulp-notify');
-const postCss = require('gulp-postcss');
-const autoprefixer = require('autoprefixer');
-const groupCssMediaQueries = require('gulp-group-css-media-queries');
-const cssNano = require('gulp-cssnano');
+import sass from 'gulp-dart-sass';
+import notify from 'gulp-notify';
+import postCss from 'gulp-postcss';
+import autoprefixer from 'autoprefixer';
+import groupCssMediaQueries from 'gulp-group-css-media-queries';
+import cssNano from 'gulp-cssnano';
 
 // JavaScript
-const gulpESLint = require('gulp-eslint');
-const webpack = require('webpack');
-const webpackStream = require('webpack-stream');
-const webpackProductionConfig = require('./webpack.production');
-const webpackDevelopmentConfig = require('./webpack.development');
+import gulpESLint from 'gulp-eslint';
+import webpack from 'webpack';
+import webpackStream from 'webpack-stream';
+import webpackProductionConfig from './webpack.production.js';
+import webpackDevelopmentConfig from './webpack.development.js';
 
 // Image Compression
-const imageMin = require('gulp-imagemin');
-const pngQuant = require('imagemin-pngquant');
-const mozJpeg = require('imagemin-mozjpeg');
-const svgo = require('gulp-svgo');
-const webp = require('gulp-webp');
+import imageMin from 'gulp-imagemin';
+import pngQuant from 'imagemin-pngquant';
+import mozJpeg from 'imagemin-mozjpeg';
+import svgo from 'gulp-svgo';
+import webp from 'gulp-webp';
 
 // Browser Sync
-const browserSync = require('browser-sync').create();
+import browserSync from 'browser-sync';
 
 // Delete
-const del = require('del');
+import { deleteAsync } from 'del';
 
 // Path Setting
 const paths = {
@@ -46,7 +47,7 @@ const paths = {
     src: './src/images/**/*.{jpg,jpeg,png,gif,svg}',
     srcWebp: './src/images/**/*.{jpg,jpeg,png}',
     dist: './assets/images/',
-    distWebp: './assets/images/webp/',
+    distWebp: './assets/images/',
   },
 };
 
@@ -185,13 +186,20 @@ const imagesCompress = () => {
 };
 
 /**
+ * Webp
+ */
+const toWebp = () => {
+  return src(paths.images.srcWebp).pipe(webp()).pipe(dest(paths.images.dist));
+};
+
+/**
  * File deletion (CSS, JS, IMG)
  */
 const cleanAssetsFiles = () => {
-  return del([paths.styles.dist, paths.scripts.dist, paths.images.dist]);
+  return deleteAsync([paths.styles.dist, paths.scripts.dist, paths.images.dist]);
 };
 const cleanMapFiles = () => {
-  return del([paths.styles.map, paths.scripts.map]);
+  return deleteAsync([paths.styles.map, paths.scripts.map]);
 };
 
 /**
@@ -199,30 +207,12 @@ const cleanMapFiles = () => {
  */
 const watchFiles = () => {
   watch(paths.styles.src).on('change', series(compileDevelopmentSass));
-  watch(paths.scripts.src).on(
-    'change',
-    series(bundleDevelopmentJavaScript, esLint)
-  );
+  watch(paths.scripts.src).on('change', series(bundleDevelopmentJavaScript, esLint));
   watch(paths.images.src).on('change', series(imagesCompress));
 };
 
 // $ npx gulp
-exports.default = series(
-  parallel(
-    cleanMapFiles,
-    compileDevelopmentSass,
-    bundleDevelopmentJavaScript,
-    imagesCompress
-  ),
-  series(watchFiles)
-);
+export default series(parallel(cleanMapFiles, compileDevelopmentSass, bundleDevelopmentJavaScript, imagesCompress, toWebp), series(watchFiles));
 
 // $ npx gulp build
-exports.build = series(
-  parallel(
-    cleanMapFiles,
-    compileProductionSass,
-    bundleProductionJavaScript,
-    imagesCompress
-  )
-);
+export const build = series(parallel(cleanMapFiles, compileProductionSass, bundleProductionJavaScript, imagesCompress, toWebp));
