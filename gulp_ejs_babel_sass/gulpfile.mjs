@@ -1,9 +1,10 @@
 // Gulp
-const { gulp, src, dest, watch, lastRun, series, parallel } = require('gulp');
-const plumber = require('gulp-plumber');
+import pkg from 'gulp';
+const { gulp, src, dest, watch, lastRun, series, parallel } = pkg;
+import plumber from 'gulp-plumber';
 
 // Environment Setting
-const minimist = require('minimist');
+import minimist from 'minimist';
 const options = minimist(process.argv.slice(2), {
   string: 'env',
   default: {
@@ -32,40 +33,44 @@ if (options.env === 'prod') {
 //console.info(process.env.domain);
 
 // EJS
-const fs = require('fs');
-const htmlMin = require('gulp-htmlmin');
-const prettify = require('gulp-prettify');
-const ejs = require('gulp-ejs');
-const rename = require('gulp-rename');
-const replace = require('gulp-replace');
+import fs from 'fs';
+import htmlMin from 'gulp-htmlmin';
+import prettify from 'gulp-prettify';
+import ejs from 'gulp-ejs';
+import rename from 'gulp-rename';
+import replace from 'gulp-replace';
+//import htmlhint from 'gulp-htmlhint';
+import { htmlValidator } from 'gulp-w3c-html-validator';
+import through2 from 'through2';
 
 // JavaScript
-const gulpESLint = require('gulp-eslint');
-const webpack = require('webpack');
-const webpackStream = require('webpack-stream');
-const webpackProductionConfig = require('./webpack.production');
-const webpackDevelopmentConfig = require('./webpack.development');
+import gulpESLint from 'gulp-eslint';
+import webpack from 'webpack';
+import webpackStream from 'webpack-stream';
+import webpackProductionConfig from './webpack.production.js';
+import webpackDevelopmentConfig from './webpack.development.js';
 
 // Sass
-const sass = require('gulp-dart-sass');
-const notify = require('gulp-notify');
-const postCss = require('gulp-postcss');
-const autoprefixer = require('autoprefixer');
-const groupCssMediaQueries = require('gulp-group-css-media-queries');
-const cssNano = require('gulp-cssnano');
+import sass from 'gulp-dart-sass';
+import notify from 'gulp-notify';
+import postCss from 'gulp-postcss';
+import autoprefixer from 'autoprefixer';
+import groupCssMediaQueries from 'gulp-group-css-media-queries';
+import cssNano from 'gulp-cssnano';
 
 // Image Compression
-const imageMin = require('gulp-imagemin');
-const pngQuant = require('imagemin-pngquant');
-const mozJpeg = require('imagemin-mozjpeg');
-const svgo = require('gulp-svgo');
-const webp = require('gulp-webp');
+import imageMin from 'gulp-imagemin';
+import pngQuant from 'imagemin-pngquant';
+import mozJpeg from 'imagemin-mozjpeg';
+import svgo from 'gulp-svgo';
+import webp from 'gulp-webp';
 
 // Browser Sync
-const browserSync = require('browser-sync').create();
+import browserSync from 'browser-sync';
 
 // Delete
-const del = require('del');
+//import del from 'del';
+import { deleteAsync } from 'del';
 
 // Path Setting
 const paths = {
@@ -74,6 +79,9 @@ const paths = {
     dist: './public/',
     watch: './src/ejs/**/*.ejs',
     static: './src/static/html/**/*.html',
+  },
+  html: {
+    dist: 'public/**/*.html',
   },
   scripts: {
     src: './src/js/**/*.js',
@@ -93,6 +101,7 @@ const paths = {
     dist: './public/assets/images/',
     distWebp: './public/assets/images/webp/',
     static: './src/static/images/**/*.{jpg,jpeg,png,gif,svg,ico}',
+    staticWebp: './src/static/images/**/*.{jpg,jpeg,png}',
   },
   fonts: {
     src: './src/static/fonts/**/*.{otf,ttf,woff,woff2}',
@@ -170,6 +179,25 @@ const bundleDevelopmentJavaScript = () => {
   return webpackStream(webpackDevelopmentConfig, webpack)
     .pipe(plumber({ errorHandler: notify.onError('<%= error.message %>') }))
     .pipe(dest(paths.scripts.dist));
+};
+
+/**
+ * HTML Hint
+ */
+const htmlhintLint = () => {
+  return src([paths.html.dist]).pipe(htmlhint('.htmlhintrc')).pipe(htmlhint.reporter());
+};
+
+/**
+ * HTML Validator
+ */
+/*const handleFile = (file, encoding, callback) => {
+  callback(null, file);
+  if (!file.w3cHtmlValidator.validates) throw Error('HTML failed validation');
+};*/
+const validateHtml = () => {
+  return src([paths.html.dist]).pipe(htmlValidator.analyzer()).pipe(htmlValidator.reporter());
+  //return src([paths.html.dist]).pipe(htmlValidator.analyzer()).pipe(through2.obj(handleFile));
 };
 
 /**
@@ -290,6 +318,16 @@ const imagesCompress = () => {
 };
 
 /**
+ * Webp
+ */
+const toWebp = () => {
+  return src(paths.images.srcWebp).pipe(webp()).pipe(dest(paths.images.dist));
+};
+const toStaticWebp = () => {
+  return src(paths.images.staticWebp).pipe(webp()).pipe(dest(paths.images.dist));
+};
+
+/**
  * File Copy
  */
 // HTML
@@ -330,6 +368,8 @@ const browserSyncFunc = (done) => {
     },
     //startPath: './public/index.html',
     reloadOnRestart: true,
+    open: false,
+    //browser: ['google chrome', 'firefox'],
   });
   done();
 };
@@ -346,7 +386,7 @@ const browserReloadFunc = (done) => {
  * File deletion
  */
 const cleanAllFiles = () => {
-  return del(paths.del.all);
+  return deleteAsync(paths.del.all);
 };
 //const cleanAssetsFiles = () => {
 //  return del([paths.styles.dist, paths.scripts.dist, paths.images.dist]);
@@ -361,68 +401,24 @@ const cleanAllFiles = () => {
 const watchFiles = () => {
   watch(paths.ejs.watch, series(ejsCompile, browserReloadFunc));
   watch(paths.ejs.static, series(htmlCopy, browserReloadFunc));
-  watch(paths.scripts.src).on(
-    'change',
-    series(bundleDevelopmentJavaScript, esLint, browserReloadFunc)
-  );
+  watch(paths.html.dist).on('change', series(validateHtml));
+  watch(paths.scripts.src).on('change', series(bundleDevelopmentJavaScript, esLint, browserReloadFunc));
   watch(paths.scripts.static, series(jsCopy, browserReloadFunc));
   watch(paths.styles.src).on('change', series(compileDevelopmentSass));
   watch(paths.styles.static, series(cssCopy));
   watch(paths.images.src).on('change', series(imagesCompress));
   watch(paths.images.static, series(imagesCopy, browserReloadFunc));
+  watch(paths.images.srcWebp).on('change', series(toWebp));
+  watch(paths.images.staticWebp).on('change', series(toStaticWebp));
   watch(paths.fonts.src, series(fontsCopy, browserReloadFunc));
   watch(paths.json.src, series(jsonCopy, browserReloadFunc));
 };
 
 // $ npx gulp
-exports.default = series(
-  parallel(cleanAllFiles),
-  parallel(
-    ejsCompile,
-    htmlCopy,
-    bundleDevelopmentJavaScript,
-    jsCopy,
-    compileDevelopmentSass,
-    cssCopy,
-    imagesCompress,
-    imagesCopy,
-    fontsCopy,
-    jsonCopy
-  ),
-  series(browserSyncFunc, watchFiles)
-);
+export default series(parallel(cleanAllFiles), parallel(ejsCompile, htmlCopy, bundleDevelopmentJavaScript, jsCopy, compileDevelopmentSass, cssCopy, imagesCompress, imagesCopy, toWebp, toStaticWebp, fontsCopy, jsonCopy), series(browserSyncFunc, watchFiles));
 
 // $ npx gulp dev
-exports.dev = series(
-  parallel(cleanAllFiles),
-  parallel(
-    ejsCompile,
-    htmlCopy,
-    bundleDevelopmentJavaScript,
-    jsCopy,
-    compileDevelopmentSass,
-    cssCopy,
-    imagesCompress,
-    imagesCopy,
-    fontsCopy,
-    jsonCopy
-  )
-);
+export const dev = series(parallel(cleanAllFiles), parallel(ejsCompile, htmlCopy, bundleDevelopmentJavaScript, jsCopy, compileDevelopmentSass, cssCopy, imagesCompress, imagesCopy, toWebp, toStaticWebp, fontsCopy, jsonCopy));
 
 // $ npx gulp build
-exports.build = series(
-  parallel(cleanAllFiles),
-  parallel(
-    cleanAllFiles,
-    ejsCompile,
-    htmlCopy,
-    bundleProductionJavaScript,
-    jsCopy,
-    compileProductionSass,
-    cssCopy,
-    imagesCompress,
-    imagesCopy,
-    fontsCopy,
-    jsonCopy
-  )
-);
+export const build = series(parallel(cleanAllFiles), parallel(cleanAllFiles, ejsCompile, htmlCopy, bundleProductionJavaScript, jsCopy, compileProductionSass, cssCopy, imagesCompress, imagesCopy, toWebp, toStaticWebp, fontsCopy, jsonCopy));
