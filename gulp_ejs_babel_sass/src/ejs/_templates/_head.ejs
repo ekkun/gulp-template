@@ -20,21 +20,15 @@
 <meta property="og:description" content="<%= meta.description %>">
 <meta property="og:site_name" content="">
 <link rel="canonical" href="<%= meta.canonical %>">
-<link rel="shortcut icon" href="<%= domain %>/assets/images/favicon/favicon.ico" />
-<link rel="icon" type="image/x-icon" sizes="16x16 32x32" href="<%= domain %>/assets/images/favicon/favicon.ico">
-<link rel="apple-touch-icon" sizes="152x152" href="<%= domain %>/assets/images/favicon/favicon-152.png">
-<link rel="apple-touch-icon" sizes="144x144" href="<%= domain %>/assets/images/favicon/favicon-144.png">
-<link rel="apple-touch-icon" sizes="120x120" href="<%= domain %>/assets/images/favicon/favicon-120.png">
-<link rel="apple-touch-icon" sizes="114x114" href="<%= domain %>/assets/images/favicon/favicon-114.png">
-<link rel="apple-touch-icon" sizes="180x180" href="<%= domain %>/assets/images/favicon/favicon-180.png">
-<link rel="apple-touch-icon" sizes="72x72" href="<%= domain %>/assets/images/favicon/favicon-72.png">
-<link rel="apple-touch-icon" sizes="57x57" href="<%= domain %>/assets/images/favicon/favicon-57.png">
-<link rel="icon" sizes="32x32" href="<%= domain %>/assets/images/favicon/favicon-32.png" >
-<meta name="msapplication-TileColor" content="#FFFFFF">
-<meta name="msapplication-TileImage" content="<%= domain %>/assets/images/favicon/favicon-144.png">
+<link rel="icon" type="image/svg+xml" href="<%= domain %>/assets/images/favicon/favicon.svg">
+<link rel="apple-touch-icon" href="<%= domain %>/assets/images/favicon/apple-touch-icon.png">
 <link rel="manifest" href="<%= domain %>/assets/images/favicon/manifest.json">
 <link rel="icon" sizes="192x192" href="<%= domain %>/assets/images/favicon/favicon-192.png">
+<%_ if (meta.page == 'home') { _%>
+<link rel="stylesheet" type="text/css" href="<%= meta.stylePath %>home.css" media="all">
+<%_ } else { _%>
 <link rel="stylesheet" type="text/css" href="<%= meta.stylePath %>style.css" media="all">
+  <%_ } _%>
 <script type="application/ld+json">
 [
   {
@@ -75,5 +69,5 @@
 <body class="<%= meta.page %>">
   <a id="top" name="top"></a>
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PQBV8GM" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-1234567" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->

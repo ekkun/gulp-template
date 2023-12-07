@@ -1,11 +1,9 @@
 # Gulp Template
 
 Gulp + EJS + Babel(Webpack) + Sass + Image Compression
-For node v14
-
-(macOS13.2.1 / node v14.21.3 検証済み)
-
 EJS テンプレートエンジン, JavaScrip トランスパイル, Sass (Scss), 画像圧縮を目的としたタスクランナー。
+
+(macOS 14.1.2 / node v18.19.0 検証済み)
 
 - ejs -> html
 - babel -> js
@@ -92,6 +90,7 @@ $ npx gulp build --env prod
 │  │  │  ├─ project/
 │  │  │  └─ utility/
 │  │  ├─ page/
+│  │  ├─ home.scss
 │  │  └─ style.scss
 │  └─ static/ (静的ファイル一式は/public/にコピーされる)
 │
