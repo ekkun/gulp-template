@@ -50,7 +50,6 @@ import notify from 'gulp-notify';
 import postCss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import groupCssMediaQueries from 'gulp-group-css-media-queries';
-import cssNano from 'gulp-cssnano';
 
 // Image Compression
 import imageMin from 'gulp-imagemin';
@@ -185,8 +184,8 @@ const compileProductionSass = () => {
     .pipe(
       plumber({
         errorHandler: notify.onError({
-          title: 'エラー',
-          message: '<%= error.message %>',
+          title: 'CSS エラー',
+          message: '\n' + 'Line: <%= error.line %>' + '\n' + 'File: <%= error.file %>' + '\n' + 'Error: <%= error.message %>',
         }),
       })
     )
@@ -195,48 +194,56 @@ const compileProductionSass = () => {
         outputStyle: 'compressed', // expanded, compressed
       }).on('error', sass.logError)
     )
+    .pipe(groupCssMediaQueries())
     .pipe(
       postCss([
         autoprefixer({
           cascade: true,
-          grid: 'autoplace',
+          grid: true, // 'autoplace' or true
         }),
       ])
     )
-    .pipe(groupCssMediaQueries())
-    .pipe(cssNano())
+    .pipe(
+      sass({
+        outputStyle: 'compressed', // expanded, compressed
+      })
+    )
     .pipe(dest(paths.styles.dist)) // フォルダーに保存
     .pipe(browserSync.stream());
 };
 // Development
 const compileDevelopmentSass = () => {
-  return (
-    src(paths.styles.src, { sourcemaps: true }) // ファイルを取得
-      .pipe(
-        plumber({
-          errorHandler: notify.onError({
-            title: 'エラー',
-            message: '<%= error.message %>',
-          }),
-        })
-      )
-      .pipe(
-        sass({
-          outputStyle: 'expanded', // expanded, compressed
-        }).on('error', sass.logError)
-      )
-      .pipe(
-        postCss([
-          autoprefixer({
-            cascade: true,
-            grid: 'autoplace',
-          }),
-        ])
-      )
-      // .pipe(groupCssMediaQueries())
-      .pipe(dest(paths.styles.dist, { sourcemaps: './' })) // フォルダーに保存
-      .pipe(browserSync.stream())
-  );
+  return src(paths.styles.src, { sourcemaps: true }) // ファイルを取得
+    .pipe(
+      plumber({
+        //errorHandler: notify.onError('Error: <%= error.message %>'),
+        errorHandler: notify.onError({
+          title: 'CSS エラー',
+          message: '\n' + 'Line: <%= error.line %>' + '\n' + 'File: <%= error.file %>' + '\n' + 'Error: <%= error.message %>',
+        }),
+      })
+    )
+    .pipe(
+      sass({
+        outputStyle: 'expanded', // expanded, compressed
+      }).on('error', sass.logError)
+    )
+    .pipe(groupCssMediaQueries())
+    .pipe(
+      postCss([
+        autoprefixer({
+          cascade: true,
+          grid: true, // 'autoplace' or true
+        }),
+      ])
+    )
+    .pipe(
+      sass({
+        outputStyle: 'expanded', // expanded, compressed
+      })
+    )
+    .pipe(dest(paths.styles.dist, { sourcemaps: './' })) // フォルダーに保存
+    .pipe(browserSync.stream());
 };
 
 /**
