@@ -9,7 +9,6 @@ import notify from 'gulp-notify';
 import postCss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import groupCssMediaQueries from 'gulp-group-css-media-queries';
-import cssNano from 'gulp-cssnano';
 
 // JavaScript
 import gulpESLint from 'gulp-eslint';
@@ -60,8 +59,8 @@ const compileProductionSass = () => {
     .pipe(
       plumber({
         errorHandler: notify.onError({
-          title: 'エラー',
-          message: '<%= error.message %>',
+          title: 'CSS エラー',
+          message: '\n' + 'Line: <%= error.line %>' + '\n' + 'File: <%= error.file %>' + '\n' + 'Error: <%= error.message %>',
         }),
       })
     )
@@ -70,16 +69,20 @@ const compileProductionSass = () => {
         outputStyle: 'compressed', // expanded, compressed
       }).on('error', sass.logError)
     )
+    .pipe(groupCssMediaQueries())
     .pipe(
       postCss([
         autoprefixer({
           cascade: true,
-          grid: 'autoplace',
+          grid: 'autoplace', // 'autoplace' or true
         }),
       ])
     )
-    .pipe(groupCssMediaQueries())
-    .pipe(cssNano())
+    .pipe(
+      sass({
+        outputStyle: 'compressed', // expanded, compressed
+      })
+    )
     .pipe(dest(paths.styles.dist)) // フォルダーに保存
     .pipe(browserSync.stream());
 };
@@ -90,8 +93,8 @@ const compileDevelopmentSass = () => {
       .pipe(
         plumber({
           errorHandler: notify.onError({
-            title: 'エラー',
-            message: '<%= error.message %>',
+            title: 'CSS エラー',
+            message: '\n' + 'Line: <%= error.line %>' + '\n' + 'File: <%= error.file %>' + '\n' + 'Error: <%= error.message %>',
           }),
         })
       )
@@ -100,15 +103,20 @@ const compileDevelopmentSass = () => {
           outputStyle: 'expanded', // expanded, compressed
         }).on('error', sass.logError)
       )
+      .pipe(groupCssMediaQueries())
       .pipe(
         postCss([
           autoprefixer({
             cascade: true,
-            grid: 'autoplace',
+            grid: 'autoplace', // 'autoplace' or true
           }),
         ])
       )
-      // .pipe(groupCssMediaQueries())
+      .pipe(
+        sass({
+          outputStyle: 'expanded', // expanded, compressed
+        })
+      )
       .pipe(dest(paths.styles.dist, { sourcemaps: './' })) // フォルダーに保存
       //変更があった所のみコンパイル
       .pipe(browserSync.stream())
@@ -121,13 +129,27 @@ const compileDevelopmentSass = () => {
 // Production
 const bundleProductionJavaScript = () => {
   return webpackStream(webpackProductionConfig, webpack)
-    .pipe(plumber({ errorHandler: notify.onError('<%= error.message %>') }))
+    .pipe(
+      plumber({
+        errorHandler: notify.onError({
+          title: 'JavaScript エラー',
+          message: '\n' + 'Line: <%= error.line %>' + '\n' + 'File: <%= error.file %>' + '\n' + 'Error: <%= error.message %>',
+        }),
+      })
+    )
     .pipe(dest(paths.scripts.dist));
 };
 // Development
 const bundleDevelopmentJavaScript = () => {
   return webpackStream(webpackDevelopmentConfig, webpack)
-    .pipe(plumber({ errorHandler: notify.onError('<%= error.message %>') }))
+    .pipe(
+      plumber({
+        errorHandler: notify.onError({
+          title: 'JavaScript エラー',
+          message: '\n' + 'Line: <%= error.line %>' + '\n' + 'File: <%= error.file %>' + '\n' + 'Error: <%= error.message %>',
+        }),
+      })
+    )
     .pipe(dest(paths.scripts.dist));
 };
 
@@ -150,7 +172,10 @@ const imagesCompress = () => {
   })
     .pipe(
       plumber({
-        errorHandler: notify.onError('Error: <%= error.message %>'),
+        errorHandler: notify.onError({
+          title: 'Image エラー',
+          message: '<%= error.message %>',
+        }),
       })
     )
     .pipe(

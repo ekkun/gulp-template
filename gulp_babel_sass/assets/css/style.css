@@ -5,7 +5,7 @@
 ::before,
 ::after {
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
   border-style: solid;
   border-width: 0;
 }
@@ -18,9 +18,12 @@
  * 3. Remove gray overlay on links for iOS.
  */
 html {
-  line-height: 1.15; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-  -webkit-tap-highlight-color: transparent; /* 3*/
+  line-height: 1.15;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-tap-highlight-color: transparent;
+  /* 3*/
 }
 
 /* Sections */
@@ -93,9 +96,12 @@ dd {
  */
 hr {
   -webkit-box-sizing: content-box;
-          box-sizing: content-box; /* 1 */
-  height: 0; /* 1 */
-  overflow: visible; /* 2 */
+  box-sizing: content-box;
+  /* 1 */
+  height: 0;
+  /* 1 */
+  overflow: visible;
+  /* 2 */
   border-top-width: 1px;
   margin: 0;
   clear: both;
@@ -107,8 +113,10 @@ hr {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 pre {
-  font-family: monospace, monospace; /* 1 */
-  font-size: inherit; /* 2 */
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: inherit;
+  /* 2 */
 }
 
 address {
@@ -132,7 +140,8 @@ a {
  */
 abbr[title] {
   -webkit-text-decoration: underline dotted;
-          text-decoration: underline dotted; /* 2 */
+  text-decoration: underline dotted;
+  /* 2 */
 }
 
 /**
@@ -150,8 +159,10 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace; /* 1 */
-  font-size: inherit; /* 2 */
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: inherit;
+  /* 2 */
 }
 
 /**
@@ -206,9 +217,10 @@ input,
 optgroup,
 select,
 textarea {
-  -webkit-appearance: none; /* 1 */
+  -webkit-appearance: none;
+  /* 1 */
   -moz-appearance: none;
-       appearance: none;
+  appearance: none;
   vertical-align: middle;
   color: inherit;
   font: inherit;
@@ -217,7 +229,8 @@ textarea {
   margin: 0;
   border-radius: 0;
   text-align: inherit;
-  text-transform: inherit; /* 2 */
+  text-transform: inherit;
+  /* 2 */
 }
 
 /**
@@ -226,13 +239,13 @@ textarea {
 [type=checkbox] {
   -webkit-appearance: checkbox;
   -moz-appearance: checkbox;
-       appearance: checkbox;
+  appearance: checkbox;
 }
 
 [type=radio] {
   -webkit-appearance: radio;
   -moz-appearance: radio;
-       appearance: radio;
+  appearance: radio;
 }
 
 /**
@@ -309,7 +322,8 @@ textarea {
  * 1. Correct the outline style in Safari.
  */
 [type=search] {
-  outline-offset: -2px; /* 1 */
+  outline-offset: -2px;
+  /* 1 */
 }
 
 /**
@@ -324,8 +338,10 @@ textarea {
  * 2. Fix font inheritance.
  */
 ::-webkit-file-upload-button {
-  -webkit-appearance: button; /* 1 */
-  font: inherit; /* 2 */
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
 }
 
 /**
@@ -364,7 +380,8 @@ summary {
 1. Correct table border color inheritance in all Chrome and Safari.
 */
 table {
-  border-color: inherit; /* 1 */
+  border-color: inherit;
+  /* 1 */
 }
 
 caption {
@@ -400,8 +417,8 @@ th {
 
 html {
   -moz-text-size-adjust: 100%;
-   -ms-text-size-adjust: 100%;
-       text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   -webkit-tap-highlight-color: transparent;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
@@ -411,10 +428,12 @@ html {
 body {
   font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
 }
+
 body ::-moz-selection {
   color: #000;
   background: #fff;
 }
+
 body ::selection,
 body ::-moz-selection {
   color: #000;
@@ -425,6 +444,12 @@ body ::-moz-selection {
   color: #fff;
   background-color: var(--blue);
 }
+
+.u-current,
+.is-current {
+  margin: 0;
+}
+
 @media print, screen and (min-width: 768px) {
   .footer {
     color: #000;
@@ -440,10 +465,5 @@ body ::-moz-selection {
   .footer {
     background-color: var(--purple);
   }
-}
-
-.u-current,
-.is-current {
-  margin: 0;
 }
 /*# sourceMappingURL=style.css.map */
