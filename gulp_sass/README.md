@@ -1,12 +1,10 @@
 # Gulp Template
 
 Gulp + Sass
-For node v16 and v14
-
-(macOS12.6 / node v16.18.0, node v14.20.1 検証済み)
-
 Sass (Scss) に特化したタスクランナー。
 ドキュメントルートに gulpfile.js, package.json を置いて `npm i` するだけで Scss を監視、ベンダープレフィックス付与、メディアクエリ集約、コンパイル、ミニファイまでします。
+
+(macOS14.2 / node v18.19.0 検証済み)
 
 ## npm パッケージをインストール
 
