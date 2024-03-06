@@ -2,21 +2,25 @@
 
 Gulp + Babel(Webpack) + Sass + Image Compression
 JavaScrip トランスパイル, Sass (Scss), 画像圧縮を目的としたタスクランナー。
-ドキュメントルートに Gulp まわりの設定ファイルを置いて `npm i` するだけで JavaScript の監視、バンドル、トランスパイル、ミニファイ、Scss の監視、ベンダープレフィックス付与、メディアクエリ集約、コンパイル、ミニファイ、画像の監視、圧縮までします。
+ドキュメントルートに Gulp まわりの設定ファイルを置いて `npm i` or `yarn install` するだけで JavaScript の監視、バンドル、トランスパイル、ミニファイ、Scss の監視、ベンダープレフィックス付与、メディアクエリ集約、コンパイル、ミニファイ、画像の監視、圧縮までします。
 
-(macOS 14.1.2 / node v18.19.0 検証済み)
+(macOS 14.3.1 / node v18.19.0 / npm v10.5.0 / Yarn v4.1.1 検証済み)
 
 ## npm パッケージをインストール
 
 ```
 #プロジェクトのディレクトリに移動して
 $ npm install
+or
+$ yarn install
 ```
 
 ## gulp の監視
 
 ```
 $ npx gulp
+or
+$ yarn start
 ```
 
 - npm で Gulp をグローバルにインストールしている場合は `$ gulp` のみで実行可能です。
@@ -28,6 +32,8 @@ $ npx gulp
 
 ```
 $ npx gulp build
+or
+$ yarn build
 ```
 
 <small>※ 必ず納品時にこのコマンドを実行してください。</small>
@@ -76,6 +82,7 @@ $ npx gulp build
 ├─ README.md
 ├─ webpack.development.js
 ├─ webpack.production.js
+├─ yarn.lock
 ├─ index.html (ドキュメントルートに置く全ての静的ファイル群)
 └─ 他、静的ディレクトリ、ファイル群...
 

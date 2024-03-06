@@ -3,7 +3,7 @@
 Gulp + PUG + Babel(Webpack) + Sass + Image Compression
 PUG テンプレートエンジン, JavaScript トランスパイル, Sass (Scss), 画像圧縮を目的としたタスクランナー。
 
-(macOS 14.1.2 / node v18.19.0 検証済み)
+(macOS 14.3.1 / node v18.19.0 / npm v10.5.0 / Yarn v4.1.1 検証済み)
 
 - pug -> html
 - babel -> js
@@ -15,12 +15,16 @@ PUG テンプレートエンジン, JavaScript トランスパイル, Sass (Scss
 
 ```
 $ npm install
+or
+$ yarn install
 ```
 
 ## gulp の監視
 
 ```
 $ npx gulp
+or
+$ yarn start
 ```
 
 - npm で Gulp をグローバルにインストールしている場合は `$ gulp` のみで実行可能です。
@@ -31,6 +35,8 @@ $ npx gulp
 
 ```
 $ npx gulp dev --env dev
+or
+$ yarn dev
 ```
 
 ## 納品ファイル生成
@@ -39,6 +45,8 @@ $ npx gulp dev --env dev
 
 ```
 $ npx gulp build --env prod
+or
+$ yarn build
 ```
 
 <small>※ 必ず納品時にこのコマンドを実行してください。</small>

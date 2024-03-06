@@ -41,7 +41,7 @@ import rename from 'gulp-rename';
 import replace from 'gulp-replace';
 //import htmlhint from 'gulp-htmlhint';
 import { htmlValidator } from 'gulp-w3c-html-validator';
-import through2 from 'through2';
+//import through2 from 'through2';
 
 // JavaScript
 import gulpESLint from 'gulp-eslint';
