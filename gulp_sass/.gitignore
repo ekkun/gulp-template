@@ -2,3 +2,7 @@
 
 /node_modules/*
 lint_error.txt
+
+.yarn
+.pnp.cjs
+.pnp.loader.mjs
