@@ -17,9 +17,9 @@
   "author": "eiji@design24c.com",
   "license": "(c) Design24C",
   "devDependencies": {
-    "@babel/core": "^7.24.0",
-    "@babel/preset-env": "^7.24.0",
-    "autoprefixer": "^10.4.18",
+    "@babel/core": "^7.24.4",
+    "@babel/preset-env": "^7.24.4",
+    "autoprefixer": "^10.4.19",
     "babel-loader": "^9.1.3",
     "browser-sync": "^3.0.2",
     "del": "^7.1.0",
@@ -49,15 +49,15 @@
     "imagemin-pngquant": "^9.0.2",
     "minimist": "^1.2.8",
     "node-sass": "^9.0.0",
-    "npm-check-updates": "^16.14.15",
-    "postcss": "^8.4.35",
-    "sass": "^1.71.1",
+    "npm-check-updates": "^16.14.18",
+    "postcss": "^8.4.38",
+    "sass": "^1.74.1",
     "terser-webpack-plugin": "^5.3.10",
-    "webpack": "^5.90.3",
+    "webpack": "^5.91.0",
     "webpack-stream": "^7.0.0"
   },
   "dependencies": {
-    "core-js": "^3.36.0",
+    "core-js": "^3.36.1",
     "jquery": "^3.7.1"
   },
   "browserslist": [
