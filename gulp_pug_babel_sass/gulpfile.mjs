@@ -190,9 +190,11 @@ const compileProductionSass = () => {
       })
     )
     .pipe(
-      sass({
-        outputStyle: 'compressed', // expanded, compressed
-      }).on('error', sass.logError)
+      sass
+        .sync({
+          outputStyle: 'compressed', // expanded, compressed
+        })
+        .on('error', sass.logError)
     )
     .pipe(groupCssMediaQueries())
     .pipe(
@@ -204,7 +206,7 @@ const compileProductionSass = () => {
       ])
     )
     .pipe(
-      sass({
+      sass.sync({
         outputStyle: 'compressed', // expanded, compressed
       })
     )
@@ -224,9 +226,11 @@ const compileDevelopmentSass = () => {
       })
     )
     .pipe(
-      sass({
-        outputStyle: 'expanded', // expanded, compressed
-      }).on('error', sass.logError)
+      sass
+        .sync({
+          outputStyle: 'expanded', // expanded, compressed
+        })
+        .on('error', sass.logError)
     )
     .pipe(groupCssMediaQueries())
     .pipe(
@@ -238,7 +242,7 @@ const compileDevelopmentSass = () => {
       ])
     )
     .pipe(
-      sass({
+      sass.sync({
         outputStyle: 'expanded', // expanded, compressed
       })
     )
