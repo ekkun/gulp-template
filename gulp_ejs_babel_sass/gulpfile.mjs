@@ -1,6 +1,5 @@
 // Gulp
-import pkg from 'gulp';
-const { gulp, src, dest, watch, lastRun, series, parallel } = pkg;
+import { src, dest, watch, lastRun, series, parallel } from 'gulp';
 import plumber from 'gulp-plumber';
 
 // Environment Setting
@@ -33,7 +32,7 @@ if (options.env === 'prod') {
 //console.info(process.env.domain);
 
 // EJS
-import fs from 'fs';
+//import fs from 'fs';
 import htmlMin from 'gulp-htmlmin';
 import prettify from 'gulp-prettify';
 import ejs from 'gulp-ejs';
