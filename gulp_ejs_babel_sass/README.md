@@ -3,7 +3,7 @@
 Gulp + EJS + Babel(Webpack) + Sass + Image Compression
 EJS テンプレートエンジン, JavaScrip トランスパイル, Sass (Scss), 画像圧縮を目的としたタスクランナー。
 
-(macOS 14.3.1 / node v18.19.0 / npm v10.5.0 / Yarn v4.1.1 検証済み)
+(macOS 14.4.1 / node v21.6.2 / npm v10.5.0 / Yarn v4.1.1 検証済み)
 
 - ejs -> html
 - babel -> js
