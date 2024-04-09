@@ -33,7 +33,7 @@ const compileSass = () => {
         })
       )
       .pipe(
-        sass({
+        sass.sync({
           outputStyle: 'expanded', // expanded, compressed
         })
       )

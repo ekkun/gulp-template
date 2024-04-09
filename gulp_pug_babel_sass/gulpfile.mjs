@@ -96,7 +96,7 @@ const paths = {
     staticWebp: './src/static/images/**/*.{jpg,jpeg,png}',
   },
   fonts: {
-    src: './src/static/fonts/**/*.{otf,ttf,woff,woff2}',
+    src: './src/static/fonts/**/*.{otf,ttf,woff,woff2,eot}',
     dist: './public/assets/fonts/',
   },
   json: {
@@ -196,7 +196,6 @@ const compileProductionSass = () => {
         })
         .on('error', sass.logError)
     )
-    .pipe(groupCssMediaQueries())
     .pipe(
       postCss([
         autoprefixer({
@@ -205,6 +204,7 @@ const compileProductionSass = () => {
         }),
       ])
     )
+    .pipe(groupCssMediaQueries())
     .pipe(
       sass.sync({
         outputStyle: 'compressed', // expanded, compressed
@@ -232,7 +232,6 @@ const compileDevelopmentSass = () => {
         })
         .on('error', sass.logError)
     )
-    .pipe(groupCssMediaQueries())
     .pipe(
       postCss([
         autoprefixer({
@@ -241,6 +240,7 @@ const compileDevelopmentSass = () => {
         }),
       ])
     )
+    .pipe(groupCssMediaQueries())
     .pipe(
       sass.sync({
         outputStyle: 'expanded', // expanded, compressed
