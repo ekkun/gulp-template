@@ -240,7 +240,7 @@ const compileDevelopmentSass = () => {
         }),
       ])
     )
-    .pipe(groupCssMediaQueries())
+    .pipe(groupCssMediaQueries()) // ソースマップを利用したい場合はコメントアウトしてください
     .pipe(
       sass.sync({
         outputStyle: 'expanded', // expanded, compressed
