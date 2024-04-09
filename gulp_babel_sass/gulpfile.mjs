@@ -65,11 +65,12 @@ const compileProductionSass = () => {
       })
     )
     .pipe(
-      sass({
-        outputStyle: 'compressed', // expanded, compressed
-      }).on('error', sass.logError)
+      sass
+        .sync({
+          outputStyle: 'compressed', // expanded, compressed
+        })
+        .on('error', sass.logError)
     )
-    .pipe(groupCssMediaQueries())
     .pipe(
       postCss([
         autoprefixer({
@@ -78,8 +79,9 @@ const compileProductionSass = () => {
         }),
       ])
     )
+    .pipe(groupCssMediaQueries())
     .pipe(
-      sass({
+      sass.sync({
         outputStyle: 'compressed', // expanded, compressed
       })
     )
@@ -99,11 +101,12 @@ const compileDevelopmentSass = () => {
         })
       )
       .pipe(
-        sass({
-          outputStyle: 'expanded', // expanded, compressed
-        }).on('error', sass.logError)
+        sass
+          .sync({
+            outputStyle: 'expanded', // expanded, compressed
+          })
+          .on('error', sass.logError)
       )
-      .pipe(groupCssMediaQueries())
       .pipe(
         postCss([
           autoprefixer({
@@ -112,8 +115,9 @@ const compileDevelopmentSass = () => {
           }),
         ])
       )
+      .pipe(groupCssMediaQueries())
       .pipe(
-        sass({
+        sass.sync({
           outputStyle: 'expanded', // expanded, compressed
         })
       )
