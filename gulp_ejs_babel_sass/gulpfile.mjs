@@ -33,7 +33,7 @@ if (options.env === 'prod') {
 //console.info(process.env.domain);
 
 // EJS
-import fs from 'fs';
+//import fs from 'fs';
 import htmlMin from 'gulp-htmlmin';
 import prettify from 'gulp-prettify';
 import ejs from 'gulp-ejs';
@@ -288,6 +288,7 @@ const compileDevelopmentSass = () => {
         }),
       ])
     )
+    .pipe(groupCssMediaQueries()) // ソースマップを利用したい場合はコメントアウトしてください
     .pipe(
       sass.sync({
         outputStyle: 'expanded', // expanded, compressed

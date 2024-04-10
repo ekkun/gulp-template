@@ -46,7 +46,7 @@ const compileSass = () => {
           }),
         ])
       )
-      .pipe(groupCssMediaQueries())
+      .pipe(groupCssMediaQueries()) // ソースマップを利用したい場合はコメントアウトしてください
       .pipe(cssNano())
       .pipe(dest(paths.styles.dist, { sourcemaps: './' })) // フォルダーに保存
   );
