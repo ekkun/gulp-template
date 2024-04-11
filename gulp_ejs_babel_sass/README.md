@@ -104,7 +104,9 @@ $ yarn build
 │
 ├─ .eslintrc.js
 ├─ .gitignore
-├─ gulpfile.js
+├─ .htmlhintrc
+├─ .yarnrc.yml
+├─ gulpfile.mjs
 ├─ package.json
 ├─ README.md
 ├─ webpack.development.js
