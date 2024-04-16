@@ -22,19 +22,17 @@ $ yarn install
 ## gulp の監視
 
 ```
-$ npx gulp
+$ npm run start
 or
 $ yarn start
 ```
-
-- npm で Gulp をグローバルにインストールしている場合は `$ gulp` のみで実行可能です。
 
 ## 開発用ファイル生成
 
 デベロップ用のファイル一式を生成
 
 ```
-$ npx gulp dev --env dev
+$ npm run dev
 or
 $ yarn dev
 ```
@@ -44,7 +42,7 @@ $ yarn dev
 デプロイ用のファイル一式を生成
 
 ```
-$ npx gulp build --env prod
+$ npm run build
 or
 $ yarn build
 ```
@@ -58,12 +56,6 @@ $ yarn build
 ```
 ./src/ejs/_templates/_config.ejs
 ```
-
-以下のコマンドのように `--env` に `prod`, `dev` を付与することで環境変数が反映されます。
-
-- 本番環境: `$ npx gulp build --env prod`
-- 開発環境: `$ npx gulp dev --env dev`
-- ローカル: `$ npx gulp`
 
 ## ディレクトリ構成
 
@@ -115,12 +107,16 @@ $ yarn build
 
 ## 再インストール
 
-`npm`, `gulp` まわりでエラーが出た場合は node_modules の再インストールをしてください。
+`npm`, `yarn` まわりでエラーが出た場合は node_modules の再インストールをしてください。
 
 ```
 $ rm -rf node_modules
 $ npm cache clean --force
 $ npm install
+or
+$ rm -rf node_modules
+$ yarn cache clean
+$ yarn install
 ```
 
 ## 参考 <!-- Reference -->

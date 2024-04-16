@@ -18,12 +18,11 @@ $ yarn install
 ## gulp の監視
 
 ```
-$ npx gulp
+$ npm run start
 or
 $ yarn start
 ```
 
-- npm で Gulp をグローバルにインストールしている場合は `$ gulp` のみで実行可能です。
 - Browser Sync は入れていません。
 
 ## 納品ファイル生成
@@ -31,7 +30,7 @@ $ yarn start
 デプロイ用のファイル一式を生成
 
 ```
-$ npx gulp build
+$ npm run build
 or
 $ yarn build
 ```
