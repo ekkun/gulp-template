@@ -1,0 +1,9 @@
+*.log
+
+/public/*
+/node_modules/*
+*.map
+
+.yarn
+.pnp.cjs
+.pnp.loader.mjs
