@@ -50,11 +50,13 @@
     "minimist": "^1.2.8",
     "node-sass": "^9.0.0",
     "npm-check-updates": "^16.14.18",
+    "path": "^0.12.7",
     "postcss": "^8.4.38",
-    "sass": "^1.74.1",
+    "sass": "^1.75.0",
     "terser-webpack-plugin": "^5.3.10",
     "webpack": "^5.91.0",
-    "webpack-stream": "^7.0.0"
+    "webpack-stream": "^7.0.0",
+    "webpack-watched-glob-entries-plugin": "^3.0.0"
   },
   "dependencies": {
     "core-js": "^3.36.1",
@@ -68,6 +70,6 @@
     "install": "$ arch -arm64 npm i (このコマンドでもM1 Macだとnode@16でインスコできない...)",
     "gulp": "$ npx gulp, $ npx gulp dev --env dev, $ npx gulp build --env prod",
     "yarn": "$ yarn start, $ yarn dev, $ yarn build",
-    "npm-check-updates": "$ npx ncu, $ npx ncu -u --target patch"
+    "npm-check-updates": "$ npx ncu, $ ncu --upgrade --target minor, $ npx ncu -u --target patch"
   }
 }
