@@ -1,0 +1,50 @@
+// Root
+:root {
+  /*Colors*/
+  --blue: #00baf0;
+  --white: #fff;
+  --gray: #f4f4f4;
+  --orange: #ff9545;
+  --green: #4c6520;
+  --purple: #d900ff;
+
+  /*Style Guide*/
+  --primary-color: var(--blue);
+  --secondary-color: var(--white);
+  --accent-color: var(--gray);
+  --button-1: var(--orange);
+  --button-2: var(--green);
+}
+
+// Color
+//$colorWhite: #ffffff !default;
+//$colorBlack: #333333 !default;
+//$colorGreen: #37ab9d !default;
+//$colorRed: #e93d3d !default;
+
+// Break points
+// min-width
+$breakpoint-up: (
+  'xs': 'print, screen and (min-width: 320px)',
+  's': 'print, screen and (min-width: 375px)',
+  'sm': 'print, screen and (min-width: 425px)',
+  'md': 'print, screen and (min-width: 768px)',
+  'lg': 'print, screen and (min-width: 960px)',
+  'tab': 'print, screen and (min-width: 1024px)',
+  'xl': 'print, screen and (min-width: 1280px)',
+  'pc-md': 'print, screen and (min-width: 1440px)',
+  'pc-lg': 'print, screen and (min-width: 1920px)',
+) !default;
+
+// max-width
+$breakpoint-down: (
+  'xs': 'print, screen and (max-width: 319px)',
+  's': 'print, screen and (max-width: 374px)',
+  'sm': 'print, screen and (max-width: 424px)',
+  'md': 'print, screen and (max-width: 767px)',
+  'lg': 'print, screen and (max-width: 959px)',
+  'tab': 'print, screen and (max-width: 1023px)',
+  'xl': 'print, screen and (max-width: 1279px)',
+  'pc-md': 'print, screen and (max-width: 1439px)',
+  'pc-lg': 'print, screen and (max-width: 1919px)',
+) !default;

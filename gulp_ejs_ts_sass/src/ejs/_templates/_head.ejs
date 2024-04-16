@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# website: http://ogp.me/ns/website#">
+<meta charset="utf-8">
+<!-- Google Tag Manager -->
+<script>
+</script>
+<!-- End Google Tag Manager -->
+<title><%= meta.title %></title>
+<meta name="description" content="<%= meta.description %>">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@ユーザー名" />
+<meta property="og:url" content="<%= domain %>">
+<meta property="og:type" content="article">
+<meta property="og:title" content="<%= meta.title %>">
+<meta property="og:image" content="<%= meta.ogp %>">
+<meta property="og:description" content="<%= meta.description %>">
+<meta property="og:site_name" content="">
+<link rel="canonical" href="<%= meta.canonical %>">
+<link rel="icon" type="image/svg+xml" href="<%= domain %>/assets/images/favicon/favicon.svg">
+<link rel="apple-touch-icon" href="<%= domain %>/assets/images/favicon/apple-touch-icon.png">
+<link rel="manifest" href="<%= domain %>/assets/images/favicon/manifest.json">
+<link rel="icon" sizes="192x192" href="<%= domain %>/assets/images/favicon/favicon-192.png">
+<%_ if (meta.page == 'home') { _%>
+<link rel="stylesheet" type="text/css" href="<%= meta.stylePath %>home.css" media="all">
+<%_ } else { _%>
+<link rel="stylesheet" type="text/css" href="<%= meta.stylePath %>style.css" media="all">
+  <%_ } _%>
+<script type="application/ld+json">
+[
+  {
+    "@context": "http://schema.org",
+    "@type": "Organization",
+    "url": "<%= domain %>/",
+    "logo": ""
+  },
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "<%= domain %>/",
+          "name": "トップページ"
+        }
+      }<%_ if (meta.page !== 'home') { _%>,<%_ } _%>
+    <%_ if (meta.page !== 'home') { _%>
+      <%_ for (const item of structured.item) { _%>
+      {
+        "@type": "ListItem",
+        "position": <%= item.level %>,
+        "item": {
+          "@id": "<%= domain %><%= item.url %>",
+          "name": "<%= item.name %>"
+        }
+      },
+      <% } %>
+    <% } %>
+    ]
+  }
+]
+</script>
+</head>
+<body class="<%= meta.page %>">
+  <a id="top" name="top"></a>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-1234567" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->

@@ -1,0 +1,39 @@
+extends ./_template/_layout
+
+block vars
+  -
+    head.title = 'INDEX'
+    head.slug = 'index'
+    head.keywords = 'index, INDEX'
+    head.description = 'インデックスなんです...'
+  - var isIndex = true
+
+block append head
+  script(src="", async)
+  script(src="https://www.googletagmanager.com/gtag/js?id=", async)
+  script
+    | window.dataLayer = window.dataLayer || [];
+    | function gtag(){dataLayer.push(arguments);}
+    | gtag('js', new Date());
+    | gtag('config', '');
+
+block append style
+  link(rel='stylesheet', href=`${ filePath }assets/css/home.css`)
+
+block includes
+  include ./_template/parts/article/datas/_index
+  include ./_template/parts/article/_article
+
+block main
+
+  main#main.main
+    .main__inner
+
+  //- アーティクル
+  article
+    section.section
+      .section__inner
+        +article({})
+
+block append scripts
+  script(src=`${ filePath }assets/js/home.js`)

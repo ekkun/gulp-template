@@ -1,8 +1,8 @@
 {
-  "name": "gulp-ejs-babel-sass",
+  "name": "gulp-pug-babel-sass",
   "version": "1.0.0",
-  "description": "Easy access for EJS, BABEL & SASS",
-  "main": "gulpfile.js",
+  "description": "Easy access for PUG, BABEL & SASS",
+  "main": "gulpfile.mjs",
   "repository": {
     "type": "git",
     "url": ""

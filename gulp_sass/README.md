@@ -67,6 +67,7 @@ $ yarn stylelint
 │  └─ **style.scss**
 │
 ├─ .gitignore
+├─ .yarnrc.yml
 ├─ gulpfile.js
 ├─ package.json
 ├─ README.md
