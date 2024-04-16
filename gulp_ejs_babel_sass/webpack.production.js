@@ -1,8 +1,12 @@
+const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const WebpackWatchedGlobEntries = require('webpack-watched-glob-entries-plugin');
+
+const entriesJS = WebpackWatchedGlobEntries.getEntries([path.resolve(__dirname, `./src/js/*.js`)])();
 
 const App = {
   mode: 'production', // production, development
-  entry: `./src/js/main.js`,
+  entry: entriesJS,
   output: {
     filename: 'main.js',
   },
