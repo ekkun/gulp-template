@@ -59,7 +59,6 @@
     "webpack-watched-glob-entries-plugin": "^3.0.0"
   },
   "dependencies": {
-    "core-js": "^3.36.1",
     "jquery": "^3.7.1"
   },
   "browserslist": [
