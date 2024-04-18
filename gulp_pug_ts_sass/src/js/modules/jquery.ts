@@ -1,7 +1,7 @@
 /**
  * jQuery
  */
-//import $ from 'jquery';
+import $ from 'jquery';
 
 //(() => {
 export function jquery(): void {
@@ -17,6 +17,6 @@ export function jquery(): void {
   };
 
   // jQuery
-  //console.info($('header'), $('main'), $('footer'));
+  console.info($('header'), $('main'), $('footer'));
 }
 //})();
