@@ -1,9 +1,10 @@
 /**
  * jQuery
  */
-import $ from 'jquery';
+//import $ from 'jquery';
 
-(() => {
+//(() => {
+export function jquery(): void {
   document.addEventListener('DOMContentLoaded', () => {
     modernFunction();
   });
@@ -16,5 +17,6 @@ import $ from 'jquery';
   };
 
   // jQuery
-  console.info($('header'), $('main'), $('footer'));
-})();
+  //console.info($('header'), $('main'), $('footer'));
+}
+//})();
