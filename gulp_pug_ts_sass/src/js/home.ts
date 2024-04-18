@@ -1,6 +1,7 @@
-// Sassファイルの読み込み
-
 // TypeScript
-import './modules/jquery';
+import { jquery } from './modules/jquery';
 
+jquery();
 console.info('ホームだよ！');
+
+console.error(`エラーだし`);

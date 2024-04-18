@@ -14,9 +14,14 @@ const App = {
   module: {
     rules: [
       {
-        test: /\.ts$/,
-        use: 'ts-loader',
+        test: /\.(js|ts|jsx)$/,
         exclude: /node_modules/,
+        loader: 'ts-loader',
+      },
+      {
+        test: /\.(js)$/,
+        exclude: /node_modules/,
+        loader: 'eslint-loader',
       },
     ],
   },

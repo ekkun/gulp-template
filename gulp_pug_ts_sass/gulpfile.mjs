@@ -37,8 +37,9 @@ import prettify from 'gulp-prettify';
 import pug from 'gulp-pug';
 import { htmlValidator } from 'gulp-w3c-html-validator';
 
-// JavaScript
+// TypeScript
 import gulpESLint from 'gulp-eslint';
+import typescript from 'gulp-typescript';
 import webpack from 'webpack';
 import webpackStream from 'webpack-stream';
 import webpackProductionConfig from './webpack.production.js';
@@ -169,10 +170,7 @@ const validateHtml = () => {
  * ESLint
  */
 const esLint = () => {
-  return src([paths.scripts.src])
-    .pipe(gulpESLint({ useEslintrc: true, fix: true }))
-    .pipe(gulpESLint.format())
-    .pipe(gulpESLint.failAfterError());
+  return src([paths.scripts.src]).pipe(typescript({})).pipe(gulpESLint()).pipe(gulpESLint.format()).pipe(gulpESLint.failAfterError());
 };
 
 /**
