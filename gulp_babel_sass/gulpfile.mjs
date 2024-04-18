@@ -17,13 +17,6 @@ import webpackStream from 'webpack-stream';
 import webpackProductionConfig from './webpack.production.js';
 import webpackDevelopmentConfig from './webpack.development.js';
 
-// Image Compression
-import imageMin from 'gulp-imagemin';
-import pngQuant from 'imagemin-pngquant';
-import mozJpeg from 'imagemin-mozjpeg';
-import svgo from 'gulp-svgo';
-import webp from 'gulp-webp';
-
 // Browser Sync
 import browserSync from 'browser-sync';
 
@@ -168,60 +161,6 @@ const esLint = () => {
 };
 
 /**
- * Image Compression
- */
-const imagesCompress = () => {
-  return src(paths.images.src, {
-    since: lastRun(imagesCompress),
-  })
-    .pipe(
-      plumber({
-        errorHandler: notify.onError({
-          title: 'Image エラー',
-          message: '<%= error.message %>',
-        }),
-      })
-    )
-    .pipe(
-      imageMin(
-        [
-          mozJpeg({
-            quality: 80, //画質
-          }),
-          pngQuant(
-            [0.6, 0.8] //画質の最小,最大
-          ),
-        ],
-        {
-          verbose: true, //メタ情報削除
-        }
-      )
-    )
-    .pipe(
-      svgo({
-        plugins: [
-          { removeViewbox: false },
-          { removeMetadata: false },
-          { convertColors: false },
-          { removeUnknownsAndDefaults: false },
-          { convertShapeToPath: false },
-          { collapseGroups: false },
-          { cleanupIDs: false },
-          // { mergePaths: false },
-        ],
-      })
-    )
-    .pipe(dest(paths.images.dist));
-};
-
-/**
- * Webp
- */
-const toWebp = () => {
-  return src(paths.images.srcWebp).pipe(webp()).pipe(dest(paths.images.dist));
-};
-
-/**
  * File deletion (CSS, JS, IMG)
  */
 const cleanAssetsFiles = () => {
@@ -237,11 +176,10 @@ const cleanMapFiles = () => {
 const watchFiles = () => {
   watch(paths.styles.src).on('change', series(compileDevelopmentSass));
   watch(paths.scripts.src).on('change', series(bundleDevelopmentJavaScript, esLint));
-  watch(paths.images.src).on('change', series(imagesCompress));
 };
 
 // $ npx gulp
-export default series(parallel(cleanMapFiles, compileDevelopmentSass, bundleDevelopmentJavaScript, imagesCompress, toWebp), series(watchFiles));
+export default series(parallel(compileDevelopmentSass, bundleDevelopmentJavaScript), series(watchFiles));
 
 // $ npx gulp build
-export const build = series(parallel(cleanMapFiles, compileProductionSass, bundleProductionJavaScript, imagesCompress, toWebp));
+export const build = series(parallel(cleanMapFiles, compileProductionSass, bundleProductionJavaScript));
