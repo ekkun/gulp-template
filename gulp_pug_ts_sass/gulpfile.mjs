@@ -52,13 +52,6 @@ import postCss from 'gulp-postcss';
 import autoprefixer from 'autoprefixer';
 import groupCssMediaQueries from 'gulp-group-css-media-queries';
 
-// Image Compression
-import imageMin from 'gulp-imagemin';
-import pngQuant from 'imagemin-pngquant';
-import mozJpeg from 'imagemin-mozjpeg';
-import svgo from 'gulp-svgo';
-import webp from 'gulp-webp';
-
 // Browser Sync
 import browserSync from 'browser-sync';
 
@@ -249,60 +242,6 @@ const compileDevelopmentSass = () => {
 };
 
 /**
- * Image Compression
- */
-const imagesCompress = () => {
-  return src(paths.images.src, {
-    since: lastRun(imagesCompress),
-  })
-    .pipe(
-      plumber({
-        errorHandler: notify.onError('Error: <%= error.message %>'),
-      })
-    )
-    .pipe(
-      imageMin(
-        [
-          mozJpeg({
-            quality: 80, //画質
-          }),
-          pngQuant(
-            [0.6, 0.8] //画質の最小,最大
-          ),
-        ],
-        {
-          verbose: true, //メタ情報削除
-        }
-      )
-    )
-    .pipe(
-      svgo({
-        plugins: [
-          { removeViewbox: false },
-          { removeMetadata: false },
-          { convertColors: false },
-          { removeUnknownsAndDefaults: false },
-          { convertShapeToPath: false },
-          { collapseGroups: false },
-          { cleanupIDs: false },
-          // { mergePaths: false },
-        ],
-      })
-    )
-    .pipe(dest(paths.images.dist));
-};
-
-/**
- * Webp
- */
-const toWebp = () => {
-  return src(paths.images.srcWebp).pipe(webp()).pipe(dest(paths.images.dist));
-};
-const toStaticWebp = () => {
-  return src(paths.images.staticWebp).pipe(webp()).pipe(dest(paths.images.dist));
-};
-
-/**
  * File Copy
  */
 // HTML
@@ -316,10 +255,6 @@ const jsCopy = () => {
 // CSS
 const cssCopy = () => {
   return src(paths.styles.static).pipe(dest(paths.styles.dist));
-};
-// IMAGES
-const imagesCopy = () => {
-  return src(paths.images.static).pipe(dest(paths.images.dist));
 };
 // FONT
 const fontsCopy = () => {
@@ -381,19 +316,15 @@ const watchFiles = () => {
   watch(paths.scripts.static, series(jsCopy, browserReloadFunc));
   watch(paths.styles.src).on('change', series(compileDevelopmentSass));
   watch(paths.styles.static, series(cssCopy));
-  watch(paths.images.src).on('change', series(imagesCompress));
-  watch(paths.images.static, series(imagesCopy, browserReloadFunc));
-  watch(paths.images.srcWebp).on('change', series(toWebp));
-  watch(paths.images.staticWebp).on('change', series(toStaticWebp));
   watch(paths.fonts.src, series(fontsCopy, browserReloadFunc));
   watch(paths.json.src, series(jsonCopy, browserReloadFunc));
 };
 
 // $ npx gulp
-export default series(parallel(cleanAllFiles), parallel(pugs, htmlCopy, bundleDevelopmentJavaScript, jsCopy, compileDevelopmentSass, cssCopy, imagesCompress, imagesCopy, toWebp, toStaticWebp, fontsCopy, jsonCopy), series(browserSyncFunc, watchFiles));
+export default series(parallel(pugs, htmlCopy, bundleDevelopmentJavaScript, jsCopy, compileDevelopmentSass, cssCopy, fontsCopy, jsonCopy), series(browserSyncFunc, watchFiles));
 
 // $ npx gulp dev
-export const dev = series(parallel(cleanAllFiles), parallel(pugs, htmlCopy, bundleDevelopmentJavaScript, jsCopy, compileDevelopmentSass, cssCopy, imagesCompress, imagesCopy, toWebp, toStaticWebp, fontsCopy, jsonCopy));
+export const dev = series(parallel(cleanAllFiles), parallel(pugs, htmlCopy, bundleDevelopmentJavaScript, jsCopy, compileDevelopmentSass, cssCopy, fontsCopy, jsonCopy));
 
 // $ npx gulp build
-export const build = series(parallel(cleanAllFiles), parallel(cleanAllFiles, pugs, htmlCopy, bundleProductionJavaScript, jsCopy, compileProductionSass, cssCopy, imagesCompress, imagesCopy, toWebp, toStaticWebp, fontsCopy, jsonCopy));
+export const build = series(parallel(cleanAllFiles), parallel(cleanAllFiles, pugs, htmlCopy, bundleProductionJavaScript, jsCopy, compileProductionSass, cssCopy, fontsCopy, jsonCopy));
