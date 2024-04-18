@@ -1,7 +1,7 @@
 # Gulp Template
 
 Gulp + PUG + TypeScript (Webpack) + Sass + Image Compression
-PUG テンプレートエンジン, TavaScript トランスパイル, Sass (Scss), 画像圧縮を目的としたタスクランナー。
+PUG テンプレートエンジン, TypeScript トランスパイル, Sass (Scss), 画像最適化＆webp 化を目的としたビルダー（タスクランナー）。
 
 (macOS 14.4.1 / node v21.6.2 / npm v10.5.0 / Yarn v4.1.1 検証済み)
 
@@ -27,11 +27,9 @@ or
 $ yarn start
 ```
 
-- npm で Gulp をグローバルにインストールしている場合は `$ gulp` のみで実行可能です。
-
 ## 開発用ファイル生成
 
-デベロップ用のファイル一式を生成
+開発用のファイル一式を生成
 
 ```
 $ npm run dev
@@ -41,7 +39,7 @@ $ yarn dev
 
 ## 納品ファイル生成
 
-デプロイ用のファイル一式を生成
+公開用のファイル一式を生成
 
 ```
 $ npm run build
@@ -50,6 +48,22 @@ $ yarn build
 ```
 
 <small>※ 必ず納品時にこのコマンドを実行してください。</small>
+
+## 画像最適化＆webp 化
+
+画像の画像最適化と webp 化を同時に実行します
+png -> png & webp
+jpeg -> jpeg & webp
+svg -> ミニファイ
+監視、開発用、公開用すべてのコマンドで実行します
+
+```
+$ npm run images
+or
+$ yarn images
+```
+
+<small>※ 画像追加、修正時にこのコマンドを実行してください。</small>
 
 ## ディレクトリ構成
 

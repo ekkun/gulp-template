@@ -1,7 +1,7 @@
 # Gulp Template
 
 Gulp + Babel(Webpack) + Sass + Image Compression
-JavaScrip トランスパイル, Sass (Scss), 画像圧縮を目的としたタスクランナー。
+JavaScrip トランスパイル, Sass (Scss), 画像最適化＆webp 化を目的としたビルダー（タスクランナー）。
 ドキュメントルートに Gulp まわりの設定ファイルを置いて `npm i` or `yarn install` するだけで JavaScript の監視、バンドル、トランスパイル、ミニファイ、Scss の監視、ベンダープレフィックス付与、メディアクエリ集約、コンパイル、ミニファイ、画像の監視、圧縮までします。
 
 (macOS 14.3.1 / node v18.19.0 / npm v10.5.0 / Yarn v4.1.1 検証済み)
@@ -27,7 +27,7 @@ $ yarn start
 
 ## 納品ファイル生成
 
-デプロイ用のファイル一式を生成
+公開用のファイル一式を生成
 
 ```
 $ npm run build
@@ -36,6 +36,22 @@ $ yarn build
 ```
 
 <small>※ 必ず納品時にこのコマンドを実行してください。</small>
+
+## 画像最適化＆webp 化
+
+画像の画像最適化と webp 化を同時に実行します
+png -> png & webp
+jpeg -> jpeg & webp
+svg -> ミニファイ
+監視、公開用すべてのコマンドで実行します
+
+```
+$ npm run images
+or
+$ yarn images
+```
+
+<small>※ 画像追加、修正時にこのコマンドを実行してください。</small>
 
 ## ディレクトリ構成
 
