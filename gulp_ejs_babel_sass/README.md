@@ -98,6 +98,7 @@ $ yarn build
 ├─ .gitignore
 ├─ .htmlhintrc
 ├─ .yarnrc.yml
+├─ convertImage.mjs
 ├─ gulpfile.mjs
 ├─ package.json
 ├─ README.md
