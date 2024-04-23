@@ -1,41 +1,33 @@
 # Gulp Template
 
-Gulp + EJS + TypeScript (Webpack) + Sass + Image Compression
+Gulp + EJS + TypeScript (Webpack) + Sass + Image Compression  
 EJS テンプレートエンジン, TypeScrip トランスパイル, Sass (Scss), 画像最適化＆webp 化を目的としたビルダー（タスクランナー）。
 
-(macOS 14.4.1 / node v21.6.2 / npm v10.5.0 / Yarn v4.1.1 検証済み)
+(macOS 14.4.1 / node v21.7.3 / Yarn v4.1.1 検証済み)
 
 - ejs -> html
 - typescript -> js
 - sass -> css
 
-## npm パッケージをインストール
+## yarn パッケージをインストール
 
 プロジェクトのディレクトリに移動して実行
 
 ```
-$ npm install
-or
 $ yarn install
 ```
 
 ## gulp の監視
 
 ```
-$ npm start
-or
 $ yarn start
 ```
-
-- npm で Gulp をグローバルにインストールしている場合は `$ gulp` のみで実行可能です。
 
 ## 開発用ファイル生成
 
 開発用のファイル一式を生成
 
 ```
-$ npm run dev
-or
 $ yarn dev
 ```
 
@@ -44,8 +36,6 @@ $ yarn dev
 公開用のファイル一式を生成
 
 ```
-$ npm run build
-or
 $ yarn build
 ```
 
@@ -53,19 +43,31 @@ $ yarn build
 
 ## 画像最適化＆webp 化
 
-画像の画像最適化と webp 化を同時に実行します
-png -> png & webp
-jpeg -> jpeg & webp
-svg -> ミニファイ
+画像の画像最適化と webp 化を同時に実行します  
+png -> png & webp  
+jpeg -> jpeg & webp  
+svg -> minify  
 監視、開発用、公開用すべてのコマンドで実行します
 
 ```
-$ npm run images
-or
 $ yarn images
 ```
 
 <small>※ 画像追加、修正時にこのコマンドを実行してください。</small>
+
+### 設定変更
+
+各種設定 package.json の script に記載されています
+
+- 画像が出力されるディレクトリを変更する場合はパスを変更してください
+- webp 化の際に png, jpeg など元ファイルを出力しない場合はオプション `-m` を外してください
+- webp 化を行わない場合はオプション `-w` を外してください
+
+```JSON
+"scripts": {
+  "images": "node convertImage.mjs -i ./src/images -o ./public/assets/images -m -w -t -v",
+},
+```
 
 ## EJS 設定
 
@@ -128,13 +130,9 @@ $ yarn images
 
 ## 再インストール
 
-`npm`, `yarn` まわりでエラーが出た場合は node_modules の再インストールをしてください。
+`yarn` まわりでエラーが出た場合は node_modules の再インストールをしてください。
 
 ```
-$ rm -rf node_modules
-$ npm cache clean --force
-$ npm install
-or
 $ rm -rf node_modules
 $ yarn cache clean
 $ yarn install

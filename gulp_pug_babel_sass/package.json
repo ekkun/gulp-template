@@ -26,7 +26,7 @@
     "browser-sync": "^3.0.2",
     "commander": "^12.0.0",
     "del": "^7.1.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.1.1",
     "eslint-plugin-eslint-comments": "^3.2.0",
     "fs-extra": "^11.2.0",
     "glob": "^10.3.12",
@@ -66,6 +66,6 @@
     "install": "$ arch -arm64 npm i (このコマンドでもM1 Macだとnode@16でインスコできない...)",
     "gulp": "$ npx gulp, $ npx gulp dev --env dev, $ npx gulp build --env prod",
     "yarn": "$ yarn start, $ yarn dev, $ yarn build",
-    "npm-check-updates": "$ npx ncu, $ ncu --upgrade --target minor, $ npx ncu -u --target patch"
+    "npm-check-updates": "$ yarn ncu, $  yarn ncu --upgrade --target minor, $ yarn ncu -u --target patch"
   }
 }

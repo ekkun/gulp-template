@@ -1,25 +1,22 @@
 # Gulp Template
 
-Gulp + Babel(Webpack) + Sass + Image Compression
-JavaScrip トランスパイル, Sass (Scss), 画像最適化＆webp 化を目的としたビルダー（タスクランナー）。
-ドキュメントルートに Gulp まわりの設定ファイルを置いて `npm i` or `yarn install` するだけで JavaScript の監視、バンドル、トランスパイル、ミニファイ、Scss の監視、ベンダープレフィックス付与、メディアクエリ集約、コンパイル、ミニファイ、画像の監視、圧縮までします。
+Gulp + Babel(Webpack) + Sass + Image Compression  
+JavaScrip トランスパイル, Sass (Scss), 画像最適化＆webp 化を目的としたビルダー（タスクランナー）。  
+ドキュメントルートに Gulp まわりの設定ファイルを置いて `yarn install` するだけで JavaScript の監視、バンドル、トランスパイル、ミニファイ、Scss の監視、ベンダープレフィックス付与、メディアクエリ集約、コンパイル、ミニファイ、画像の監視、圧縮までします。
 
-(macOS 14.3.1 / node v18.19.0 / npm v10.5.0 / Yarn v4.1.1 検証済み)
+(macOS 14.3.1 / node v21.7.3 / Yarn v4.1.1 検証済み)
 
-## npm パッケージをインストール
+## yarn パッケージをインストール
+
+プロジェクトのディレクトリに移動して
 
 ```
-#プロジェクトのディレクトリに移動して
-$ npm install
-or
 $ yarn install
 ```
 
 ## gulp の監視
 
 ```
-$ npm run start
-or
 $ yarn start
 ```
 
@@ -30,8 +27,6 @@ $ yarn start
 公開用のファイル一式を生成
 
 ```
-$ npm run build
-or
 $ yarn build
 ```
 
@@ -39,19 +34,31 @@ $ yarn build
 
 ## 画像最適化＆webp 化
 
-画像の画像最適化と webp 化を同時に実行します
-png -> png & webp
-jpeg -> jpeg & webp
-svg -> ミニファイ
-監視、公開用すべてのコマンドで実行します
+画像の画像最適化と webp 化を同時に実行します  
+png -> png & webp  
+jpeg -> jpeg & webp  
+svg -> minify  
+監視、開発用、公開用すべてのコマンドで実行します
 
 ```
-$ npm run images
-or
 $ yarn images
 ```
 
 <small>※ 画像追加、修正時にこのコマンドを実行してください。</small>
+
+### 設定変更
+
+各種設定 package.json の script に記載されています
+
+- 画像が出力されるディレクトリを変更する場合はパスを変更してください
+- webp 化の際に png, jpeg など元ファイルを出力しない場合はオプション `-m` を外してください
+- webp 化を行わない場合はオプション `-w` を外してください
+
+```JSON
+"scripts": {
+  "images": "node convertImage.mjs -i ./src/images -o ./public/assets/images -m -w -t -v",
+},
+```
 
 ## ディレクトリ構成
 
