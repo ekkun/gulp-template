@@ -12,6 +12,7 @@
  * node convertImage.mjs -h
  */
 import sharp from 'sharp';
+//import sharp from '@img/sharp-win32-x64';
 import { globSync } from 'glob';
 import path from 'path';
 import fse from 'fs-extra';
@@ -40,28 +41,28 @@ program
 const GET_ENCODER_FROM_EXTENSION = {
   jpg: 'jpg',
   jpeg: 'jpg',
-  png: 'png',
+  png: 'png'
 };
 
 // 変換オプション（参考： https://sharp.pixelplumbing.com/api-output）
 const ENCODER_OPTIONS = {
   png: {
     quality: 80,
-    compressionLevel: 4,
+    compressionLevel: 4
     //adaptiveFiltering: true,
     //progressive: true,
   },
   jpg: {
-    quality: 80,
+    quality: 80
   },
   webp: {
     png: {
-      lossless: true,
+      lossless: true
     },
     jpg: {
-      quality: 70,
-    },
-  },
+      quality: 80
+    }
+  }
 };
 
 // SVGを認識する拡張子
@@ -172,9 +173,7 @@ await Promise.all(
       }
       if (ENCODE_WEBP) {
         // webp と encodeOptions を指定して最適化
-        const destinationPathWebp = WEBP_SUFFIX_ADD
-          ? destinationPath + '.webp'
-          : destinationPath.slice(0, fileExtension.length * -1) + 'webp';
+        const destinationPathWebp = WEBP_SUFFIX_ADD ? destinationPath + '.webp' : destinationPath.slice(0, fileExtension.length * -1) + 'webp';
 
         await sharp(sourcePath).webp(ENCODER_OPTIONS['webp'][encoder]).toFile(destinationPathWebp);
         if (action !== '') {
@@ -186,20 +185,7 @@ await Promise.all(
 
     // 変換結果表示
     ts_worker_end = Date.now();
-    console.info(
-      '[',
-      encodedFileNum++,
-      '/',
-      targetFileNum,
-      ']',
-      imagePath,
-      'is',
-      action,
-      '(',
-      ts_worker_end - ts_worker_start,
-      'ms',
-      ')'
-    );
+    console.info('[', encodedFileNum++, '/', targetFileNum, ']', imagePath, 'is', action, '(', ts_worker_end - ts_worker_start, 'ms', ')');
     ts_worker_start = ts_worker_end;
   })
 );
