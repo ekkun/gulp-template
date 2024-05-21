@@ -31,7 +31,6 @@ export default {
           moveElemsAttrsToGroup: true,
           moveGroupAttrsToElems: true,
           collapseGroups: true,
-          //removeRasterImages: false,
           mergePaths: false,
           convertShapeToPath: true,
           sortAttrs: true,
